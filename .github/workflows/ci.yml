@@ -1,0 +1,44 @@
+name: Tests
+
+# Runs on every pull request, and on every push to main as a safety net.
+# Optional: make this check required on main (Settings > Rules) so a failing change cannot be merged.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  unit:
+    name: Unit and content tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm test
+
+  browsers:
+    name: Real browsers and devices
+    runs-on: ubuntu-latest
+    needs: unit
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Run the browser tests on every device profile
+        run: npx playwright test
+      - name: Upload the full report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
