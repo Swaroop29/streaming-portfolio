@@ -1,0 +1,21 @@
+{
+  "name": "streaming-portfolio",
+  "version": "1.0.0",
+  "description": "A streaming-style personal portfolio you fill in from your resume with any AI assistant.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "check": "node check.js",
+    "og": "node og.js",
+    "test": "node --test tests/*.test.js",
+    "e2e": "playwright test",
+    "test:all": "npm test && playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.1",
+    "http-server": "^14.1.1",
+    "jsdom": "^25.0.1"
+  }
+}

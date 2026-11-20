@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c0c0e">
+<title>Alex Rivera Streaming Portfolio</title>
+<meta name="description" content="Software engineer focused on backend systems and developer tooling. Projects, write-ups and live demos in a streaming-style portfolio.">
+<link rel="canonical" href="https://alex-rivera.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alex Rivera">
+<meta property="og:title" content="Alex Rivera | Software Engineer">
+<meta property="og:description" content="Software engineer focused on backend systems and developer tooling. Projects, write-ups and live demos in a streaming-style portfolio.">
+<meta property="og:url" content="https://alex-rivera.pages.dev/">
+<meta property="og:image" content="https://alex-rivera.pages.dev/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Alex Rivera, software engineer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alex Rivera | Software Engineer">
+<meta name="twitter:description" content="Software engineer focused on backend systems and developer tooling. Projects, write-ups and live demos in a streaming-style portfolio.">
+<meta name="twitter:image" content="https://alex-rivera.pages.dev/assets/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%23e5231b%27/%3E%3Ctext x=%2732%27 y=%2747%27 font-size=%2742%27 font-family=%27Arial Narrow,Impact,sans-serif%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27white%27%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="print.css" media="print">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Alex Rivera","url":"https://alex-rivera.pages.dev/","jobTitle":"Software Engineer","description":"Software engineer focused on backend systems and developer tooling. Projects, write-ups and live demos in a streaming-style portfolio.","alumniOf":[{"@type":"CollegeOrUniversity","name":"Example University"}],"knowsAbout":["Go","Python","AWS","PostgreSQL","Kubernetes","React","Terraform","Distributed Systems"],"sameAs":["https://www.linkedin.com/in/example","https://github.com/example"]}
+</script>
+<style>:root{--initials:"AR"}</style>
+<style media="print">:root{--print-contact:"alex@example.com  \00B7  UK +44 7000 000000  \00B7  linkedin.com/in/example  \00B7  github.com/example";--print-footer:"Full project write-ups and live demos: alex-rivera.pages.dev"}</style>
+</head>
+<body>
+
+<!-- opening animation -->
+<div class="intro play" id="intro" aria-hidden="true">
+  <div class="reveal"><div class="i-name"><span style="--h:1.00"><b data-c="A">A</b></span><span style="--h:0.90"><b data-c="L">L</b></span><span style="--h:0.90"><b data-c="E">E</b></span><span style="--h:1.00"><b data-c="X">X</b></span></div></div>
+</div>
+
+<!-- profile picker -->
+<div id="picker" role="dialog" aria-modal="true" aria-labelledby="pk-title">
+  <div class="wall-clip" aria-hidden="true"><div class="wall" id="wall"></div></div><div class="wall-shade" aria-hidden="true"></div>
+  <div class="brand">ALEX</div>
+  <h1 id="pk-title">Who's watching?</h1>
+  <div class="profiles">
+    <button class="profile" data-id="recruiter"><div class="bubble" aria-hidden="true">Hi! Ready to hire?</div><div class="av" style="animation-delay:-.3s"><img src="assets/avatar-recruiter.webp" alt="Recruiter character waving with a clipboard" draggable="false"></div><span>Recruiter</span></button>
+    <button class="profile" data-id="manager"><div class="bubble" aria-hidden="true">Great work speaks.</div><div class="av" style="animation-delay:-1.2s"><img src="assets/avatar-manager.webp" alt="Hiring manager character sipping coffee" draggable="false"></div><span>Hiring Manager</span></button>
+    <button class="profile" data-id="engineer"><div class="bubble" aria-hidden="true">Compiling…</div><div class="av" style="animation-delay:-2.1s"><img src="assets/avatar-engineer.webp" alt="Engineer character typing on a laptop" draggable="false"><div class="fx code-rain" aria-hidden="true"><b>01</b><b>&lt;/&gt;</b><b>{ }</b><b>10</b><b>=&gt;</b></div></div><span>Engineer</span></button>
+    <button class="profile" data-id="guest"><div class="bubble" aria-hidden="true">Ooh, what's this?</div><div class="av" style="animation-delay:-3s"><img src="assets/avatar-guest.webp" alt="Curious visitor character with a magnifying glass" draggable="false"><div class="fx glint" aria-hidden="true"></div></div><span>Just Browsing</span></button>
+  </div>
+  <button class="replay" id="replay">&#8635; Replay intro</button>
+</div>
+
+<header class="top pad" id="top">
+  <a class="brand" href="#home">ALEX</a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#episodes">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="right">
+<a class="b info" data-track="resume" style="font-size:14px;padding:6px 16px" href="https://example.com/alex-rivera-resume" target="_blank" rel="noopener">Resume</a>
+    <button class="who" id="who" aria-label="Change profile"><i id="who-i"><img alt="" src=""></i><span id="who-n">Guest</span></button>
+  </div>
+</header>
+
+<section class="billboard pad" id="home">
+  <div class="bb">
+    <div class="series">NOW STREAMING</div>
+    <h1><span>Alex</span><br><span>Rivera</span></h1>
+<div class="meta">
+      <b class="match">98% Match <span aria-label="just kidding" role="img" style="font-weight:400">&#128521;</span></b>
+      <span>2026</span>
+      <span class="age">Ex-Northwind</span>
+      <span>Software Engineer</span>
+      <span>Open to work</span>
+    </div>
+    <p id="tag">Software engineer who built and ran production services at Northwind Labs. Backend first, comfortable across the stack.</p>
+    <div class="cta">
+      <a class="b play" href="#projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg>Watch my work</a>
+      <a class="b info" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 10h2v8h-2zm0-4h2v2h-2z"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z"/></svg>Get in touch</a>
+<a class="b info" data-track="resume" href="https://example.com/alex-rivera-resume.pdf" target="_blank" rel="noopener" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5zM12 16l6-7h-4V3h-4v6H6z"/></svg>Download PDF</a>
+    </div>
+<div class="stats">
+      <div><b>3 yrs</b><span>In industry</span></div>
+      <div><b>Northwind</b><span>Former SWE</span></div>
+      <div><b>4</b><span>Featured projects</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="pad">
+
+  <section class="row" id="projects">
+    <h2>Featured projects <small>[4 titles]</small></h2>
+    <div class="track-wrap">
+      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
+      <div class="track" id="t-projects"></div>
+      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="row" id="github">
+    <h2>On GitHub <small>example</small></h2>
+    <div class="track-wrap">
+      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
+      <div class="track" id="t-repos"></div>
+      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="row" id="episodes">
+    <h2>Continue watching <small>Season 1</small></h2>
+    <div class="ep-layout">
+    <div class="episodes">
+      <div class="ep-head"><h3>Northwind Labs</h3><span>Software Engineer · Jun 2023 to Aug 2025 · Payments Platform, London</span></div>
+      <div class="ep" role="button" tabindex="0" aria-expanded="false">
+        <div class="n">1</div>
+        <div class="th" style="background:linear-gradient(135deg,#7a1410,#e5231b)">PILOT</div>
+        <div><h4>Rebuilt the invoice API caching layer</h4><p>Moved hot invoice lookups to a read-through cache. Median response time dropped by about 30%.</p></div>
+        <div class="dur">Performance</div>
+        <i class="chev" aria-hidden="true"></i>
+        <div class="ep-more"><div class="ep-more-in"><div><b>The situation</b><p>Invoice lookups hit the database on every request and slowed down at month end.</p></div><div><b>What I did</b><ul><li>Designed a read-through cache with explicit invalidation rules.</li><li>Rolled it out behind a flag and compared latency before and after.</li></ul></div><div><b>Built with</b><p>Go, Redis, PostgreSQL</p></div></div></div>
+      </div>
+      <div class="ep" role="button" tabindex="0" aria-expanded="false">
+        <div class="n">2</div>
+        <div class="th" style="background:linear-gradient(135deg,#14307a,#2b6be5)">OWNER</div>
+        <div><h4>Led a service migration with no downtime</h4><p>Moved 12 services to a new deployment platform in stages, with automated checks at every step.</p></div>
+        <div class="dur">Migration</div>
+        <i class="chev" aria-hidden="true"></i>
+        <div class="ep-more"><div class="ep-more-in"><div><b>The situation</b><p>Services ran on an ageing platform that was costly to maintain.</p></div><div><b>What I did</b><ul><li>Wrote the migration runbook and rollback plan.</li><li>Automated smoke tests that gated each service cutover.</li></ul></div><div><b>Built with</b><p>Terraform, Kubernetes, GitHub Actions</p></div></div></div>
+      </div>
+      <div class="ep-head" style="margin-top:22px"><h3>Example Studio</h3><span>Software Engineer (Intern) · Jun 2022 to Sep 2022 · Remote</span></div>
+      <div class="ep" role="button" tabindex="0" aria-expanded="false">
+        <div class="n">1</div>
+        <div class="th" style="background:linear-gradient(135deg,#0b4d3d,#12a37f)">BUILD</div>
+        <div><h4>Built an internal release dashboard</h4><p>React and Node.js dashboard that showed build and release status for every team.</p></div>
+        <div class="dur">Full stack</div>
+        <i class="chev" aria-hidden="true"></i>
+        <div class="ep-more"><div class="ep-more-in"><div><b>The situation</b><p>Teams checked release status by asking each other in chat.</p></div><div><b>What I did</b><ul><li>Built the dashboard front end and its API.</li><li>Added alerts for failed releases.</li></ul></div><div><b>Built with</b><p>React, Node.js, PostgreSQL</p></div></div></div>
+      </div>
+    </div>
+    <aside class="recap" aria-label="Season recap">
+      <div class="eyebrow">SEASON RECAP</div>
+      <h3>By the numbers</h3>
+      <div class="stat"><b>~30%</b><span>faster API response after a caching rewrite</span></div>
+      <div class="stat"><b>99.95%</b><span>uptime for the billing service</span></div>
+      <div class="stat"><b>12</b><span>services migrated to a new platform</span></div>
+      <div class="now"><i></i>Open to roles · London, UK</div>
+    </aside>
+    </div>
+  </section>
+
+  <section class="row top10" id="skills">
+    <h2>Top 10 in my toolkit <small>Today</small></h2>
+    <div class="track-wrap">
+      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
+      <div class="track" id="t-skills"></div>
+      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="row" id="beyond">
+    <h2>Beyond code <small>Extras</small></h2>
+    <div class="track-wrap">
+      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
+      <div class="track" id="t-beyond">
+        <div class="bey" tabindex="0" role="button" aria-pressed="false" aria-label="Photography: click to flip"><div class="bey-in"><div class="bf front" style="background:linear-gradient(160deg,#17171d,#5a5a6e)"><svg viewBox="0 0 64 64" aria-hidden="true"><g class="a"><rect x="8" y="18" width="48" height="34" rx="6"/><circle cx="32" cy="35" r="10"/><path d="M22 18l4-6h12l4 6"/></g></svg><small>PHOTOGRAPHY</small><b>Photography</b><p>Street photos, mostly in black and white.</p><span class="hint">Tap to flip</span></div><div class="bf back" style="background:linear-gradient(160deg,#17171d,#5a5a6e)"><small>PHOTOGRAPHY</small><b>Want to see more?</b><p>A few of my favourite frames are on my gallery page.</p><a class="b play" href="https://example.com/gallery" target="_blank" rel="noopener" onclick="event.stopPropagation()">My gallery</a></div></div></div>
+        <div class="bey" tabindex="0" role="button" aria-pressed="false" aria-label="Cycling: click to flip"><div class="bey-in"><div class="bf front" style="background:linear-gradient(160deg,#14307a,#2b6be5)"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="48" cy="14" r="5"/><g class="a peak"><path d="M5 54L24 20l11 18 7-10 17 26z"/><path d="M18 31l6-4 5 5M38 33l4-5 5 6"/></g></svg><small>OUTDOORS</small><b>Cycling</b><p>Long weekend rides, usually with a hill at the end.</p><span class="hint">Tap to flip</span></div><div class="bf back" style="background:linear-gradient(160deg,#14307a,#2b6be5)"><small>OUTDOORS</small><b>Ride along?</b><p>I am always up for a new route.</p></div></div></div>
+      </div>
+      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="row" id="about">
+    <h2>Cast &amp; crew <small>More info</small></h2>
+    <div class="about">
+      <div>
+      <div>
+        <div class="eyebrow">ORIGINAL ENGINEER</div>
+        <h3>About Alex</h3>
+        <p>I am a software engineer with a BSc in Computer Science. At Northwind Labs I built and ran backend services for a payments platform.</p>
+        <p>Away from the keyboard I cook, cycle and take far too many photos.</p>
+        <p>Next I want a team building real products, where I can keep shipping and mentor others.</p>
+      </div>
+      <dl>
+        <dt>Starring</dt><dd>Alex Rivera</dd>
+        <dt>Genres</dt><dd>Backend, Cloud, Developer tooling</dd>
+        <dt>Based in</dt><dd>London, UK</dd>
+        <dt>Off screen</dt><dd>Cooking · Cycling · Photography</dd>
+        <dt>Awards</dt><dd>Winner, Example Hackathon 2024</dd>
+      </dl>
+      <div class="edu" id="edu">
+        <h4>Education <small>Tap a stop to open it</small></h4>
+        <ol class="tl">
+          <li class="stop" tabindex="0" role="button" aria-expanded="false"><div class="when">Undergraduate · UK</div><h5>BSc, Computer Science <i class="chev" aria-hidden="true"></i></h5><div class="where">Example University · 2019 to 2023 · First class honours</div><div class="chips"><span>Dean's list 2022</span><span>Example Hackathon winner, 2024</span></div>
+            <div class="more"><div class="more-in"><p><b>Built:</b> a distributed task scheduler in Go for the final year project.</p><p><b>Result:</b> awarded the department prize for best project.</p></div></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="upnext pad" id="contact">
+  <small>UP NEXT</small>
+  <h2>You, hiring me.</h2>
+  <p>I'm interviewing for software engineering roles. If your team is hiring, I'd like to hear about it.</p>
+  <div class="cta">
+    <a class="b play" href="mailto:alex@example.com">Email me</a>
+    <a class="b info" href="https://www.linkedin.com/in/example" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="b info" href="https://github.com/example" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="mail">alex@example.com</div>
+  <div class="mail phones"><a href="tel:+447000000000">UK +44 7000 000000</a></div>
+</section>
+
+<footer class="pad"><span>Alex Rivera &middot; Software Engineer</span><span><button class="flink" id="kb-open" type="button">Keyboard shortcuts (?)</button> &middot; <button class="flink" id="print-open" type="button">Print view</button> &middot; Handmade. Updated November 2026.</span></footer>
+<details class="textver" id="text-version"><summary>Plain-text version of this portfolio (projects, repositories, skills)</summary>
+<h3>Projects</h3>
+<article><h4>Billing Service</h4><p><em>Go · PostgreSQL · Kafka &middot; AT NORTHWIND</em></p><p><b>Problem:</b> Invoices were created by several services, and totals sometimes disagreed.</p><p><b>What I built:</b> A single billing service that owns invoice creation, with idempotent writes and an audit trail.</p><p><b>Result:</b> No invoice disagreements reported after launch</p><p><b>Built with:</b> Go, PostgreSQL, Kafka</p><p><b>My role:</b> Designed and built it with one other engineer</p><p><b>Architecture:</b> API &rarr; Billing service &rarr; Kafka &rarr; Ledger</p><p><b>What I would do differently:</b> I would add contract tests between services earlier.</p></article>
+<article><h4>Release Dashboard</h4><p><em>React · Node.js &middot; INTERN PROJECT</em></p><p><b>Problem:</b> Teams could not see release status without asking each other.</p><p><b>What I built:</b> A dashboard that shows build and release state for every team and alerts on failures.</p><p><b>Result:</b> Used by all engineering teams during my internship</p><p><b>Built with:</b> React, Node.js, PostgreSQL</p><p><b>My role:</b> Built it as an intern</p><p><b>Architecture:</b> CI events &rarr; API &rarr; Dashboard</p></article>
+<article><h4>Task Scheduler</h4><p><em>Go · Distributed systems &middot; FINAL YEAR PROJECT</em></p><p><b>Problem:</b> Running scheduled jobs reliably across several machines is harder than it looks.</p><p><b>What I built:</b> A distributed task scheduler in Go that elects a leader and reassigns work when a node fails.</p><p><b>Result:</b> Awarded the department prize for best project, 2023</p><p><b>Built with:</b> Go, etcd, Docker</p><p><b>My role:</b> Built it as my final year project</p><p><b>Architecture:</b> Client &rarr; Leader &rarr; Workers</p><p><a href="https://github.com/example/task-scheduler">Source code</a></p></article>
+<article><h4>This Portfolio</h4><p><em>HTML · CSS · JS &middot; THIS SITE</em></p><p><b>Problem:</b> A CV is a flat list. I wanted a recruiter, a manager and an engineer to each find what they need quickly.</p><p><b>What I built:</b> A streaming-style portfolio built from one content file, with a build step and automated tests.</p><p><b>Result:</b> Every change is tested on desktop, tablet and phone before it goes live</p><p><b>Built with:</b> HTML, CSS, JavaScript</p><p><b>My role:</b> Designed and built it</p><p><b>Architecture:</b> profile.js &rarr; build &rarr; index.html</p></article>
+<h3>GitHub repositories</h3><ul><li><a href="https://github.com/example/task-scheduler">task-scheduler</a> (Go): A distributed task scheduler in Go.</li><li><a href="https://github.com/example/dotfiles">dotfiles</a> (Shell): My shell and editor setup.</li></ul>
+<h3>Skills</h3><ul><li>Go (Languages)</li><li>Python (Languages)</li><li>AWS (Cloud)</li><li>PostgreSQL (Data)</li><li>Kubernetes (Platform)</li><li>React (Frontend)</li><li>Terraform (Infrastructure)</li><li>Distributed Systems (Backend)</li></ul>
+</details>
+<div id="kb" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" hidden><div class="kb-box"><h3>Keyboard shortcuts</h3><ul><li><kbd>H</kbd> Home</li><li><kbd>W</kbd> Work (projects)</li><li><kbd>E</kbd> Experience</li><li><kbd>S</kbd> Skills</li><li><kbd>A</kbd> About</li><li><kbd>C</kbd> Contact</li><li><kbd>P</kbd> Print view</li><li><kbd>?</kbd> This list</li><li><kbd>Esc</kbd> Close</li></ul><button class="b info" id="kb-close" type="button">Close</button></div></div>
+
+<nav class="tabbar" id="tabbar" aria-label="Sections">
+  <a href="#home" data-s="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></svg>Home</a>
+  <a href="#projects" data-s="projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Work</a>
+  <a href="#episodes" data-s="episodes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg>Experience</a>
+  <a href="#skills" data-s="skills"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 6 6.4.6-4.9 4.3 1.5 6.3L12 17l-5.6 3.2 1.5-6.3L3 9.6 9.4 9z"/></svg>Skills</a>
+  <a href="#contact" data-s="contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4z"/></svg>Contact</a>
+</nav>
+
+<!-- project modal -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="sheet">
+    <div class="hero" id="m-hero"><button class="x" id="m-x" aria-label="Close">&times;</button><h3 id="m-title"></h3></div>
+    <div class="body">
+      <div>
+        <div class="cta" id="m-links"><a class="b play" id="m-live" href="#" target="_blank" rel="noopener">Live demo</a><a class="b info" id="m-src" href="#" target="_blank" rel="noopener">Source code</a><a class="b info" id="m-blog" href="#" target="_blank" rel="noopener">Read the write-up</a></div>
+        <p id="m-problem"></p><p id="m-built"></p>
+        <h5>Architecture</h5><div class="arch" id="m-arch"></div>
+        <h5>What I'd do differently</h5><p id="m-diff"></p>
+      </div>
+      <dl>
+        <dt>Result</dt><dd id="m-result"></dd>
+        <dt>Built with</dt><dd id="m-stack"></dd>
+        <dt>My role</dt><dd id="m-role"></dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<script src="profile.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

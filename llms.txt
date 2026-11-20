@@ -1,0 +1,91 @@
+# Alex Rivera
+
+> Software Engineer. Portfolio: https://alex-rivera.pages.dev
+
+This file holds the full content of the portfolio so that people and AI agents can read all of it without running JavaScript.
+
+## Contact
+- Email: alex@example.com
+- UK phone: +44 7000 000000
+- LinkedIn: https://www.linkedin.com/in/example
+- GitHub: https://github.com/example
+
+## About
+I am a software engineer with a BSc in Computer Science. At Northwind Labs I built and ran backend services for a payments platform.
+
+Away from the keyboard I cook, cycle and take far too many photos.
+
+Next I want a team building real products, where I can keep shipping and mentor others.
+
+- Starring: Alex Rivera
+- Genres: Backend, Cloud, Developer tooling
+- Based in: London, UK
+- Off screen: Cooking · Cycling · Photography
+- Awards: Winner, Example Hackathon 2024
+
+## Experience
+### Northwind Labs · Software Engineer · Jun 2023 to Aug 2025 · Payments Platform, London
+- Rebuilt the invoice API caching layer: Moved hot invoice lookups to a read-through cache. Median response time dropped by about 30%. Situation: Invoice lookups hit the database on every request and slowed down at month end. What I did: Designed a read-through cache with explicit invalidation rules. Rolled it out behind a flag and compared latency before and after. Built with: Go, Redis, PostgreSQL
+- Led a service migration with no downtime: Moved 12 services to a new deployment platform in stages, with automated checks at every step. Situation: Services ran on an ageing platform that was costly to maintain. What I did: Wrote the migration runbook and rollback plan. Automated smoke tests that gated each service cutover. Built with: Terraform, Kubernetes, GitHub Actions
+
+### Example Studio · Software Engineer (Intern) · Jun 2022 to Sep 2022 · Remote
+- Built an internal release dashboard: React and Node.js dashboard that showed build and release status for every team. Situation: Teams checked release status by asking each other in chat. What I did: Built the dashboard front end and its API. Added alerts for failed releases. Built with: React, Node.js, PostgreSQL
+
+## Education
+- BSc, Computer Science, Example University · 2019 to 2023 · First class honours · Dean's list 2022; Example Hackathon winner, 2024 · Built: a distributed task scheduler in Go for the final year project. Result: awarded the department prize for best project.
+
+## Projects
+### Billing Service
+Go · PostgreSQL · Kafka | AT NORTHWIND
+Problem: Invoices were created by several services, and totals sometimes disagreed.
+What I built: A single billing service that owns invoice creation, with idempotent writes and an audit trail.
+Result: No invoice disagreements reported after launch
+Built with: Go, PostgreSQL, Kafka
+My role: Designed and built it with one other engineer
+Architecture: API -> Billing service -> Kafka -> Ledger
+What I would do differently: I would add contract tests between services earlier.
+
+
+### Release Dashboard
+React · Node.js | INTERN PROJECT
+Problem: Teams could not see release status without asking each other.
+What I built: A dashboard that shows build and release state for every team and alerts on failures.
+Result: Used by all engineering teams during my internship
+Built with: React, Node.js, PostgreSQL
+My role: Built it as an intern
+Architecture: CI events -> API -> Dashboard
+
+
+### Task Scheduler
+Go · Distributed systems | FINAL YEAR PROJECT
+Problem: Running scheduled jobs reliably across several machines is harder than it looks.
+What I built: A distributed task scheduler in Go that elects a leader and reassigns work when a node fails.
+Result: Awarded the department prize for best project, 2023
+Built with: Go, etcd, Docker
+My role: Built it as my final year project
+Architecture: Client -> Leader -> Workers
+Source: https://github.com/example/task-scheduler
+
+### This Portfolio
+HTML · CSS · JS | THIS SITE
+Problem: A CV is a flat list. I wanted a recruiter, a manager and an engineer to each find what they need quickly.
+What I built: A streaming-style portfolio built from one content file, with a build step and automated tests.
+Result: Every change is tested on desktop, tablet and phone before it goes live
+Built with: HTML, CSS, JavaScript
+My role: Designed and built it
+Architecture: profile.js -> build -> index.html
+
+
+## GitHub repositories
+- task-scheduler (Go): A distributed task scheduler in Go. https://github.com/example/task-scheduler
+- dotfiles (Shell): My shell and editor setup. https://github.com/example/dotfiles
+
+## Skills
+- Go (Languages)
+- Python (Languages)
+- AWS (Cloud)
+- PostgreSQL (Data)
+- Kubernetes (Platform)
+- React (Frontend)
+- Terraform (Infrastructure)
+- Distributed Systems (Backend)
