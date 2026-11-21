@@ -7,6 +7,10 @@
    - Never invent employers, dates, numbers, links or awards. Use only what the person provided.
      If something is missing, leave "" (or remove the item). Do not guess.
    - "color" can be: red, blue, green, purple, gold, pink, lime, teal, indigo, orange, dark.
+   - Every section is optional. A list left empty ([]) removes that section from the page, including its menu link.
+     Nothing here is required except the basics at the top of `site` and a contact email.
+   - Build the page around the person's job, not around software. Rename sections (site.sections), reorder them
+     (site.sectionOrder), relabel the project popup (site.labels) and add your own sections (extraSections).
    - After editing run:  npm run build   then   npm run check   then   npm test
    ========================================================================== */
 
@@ -74,7 +78,25 @@ const site = {
     ["React", "FRONTEND"], ["Northwind", "EXPERIENCE"], ["Billing Service", "FEATURED"], ["Terraform", "INFRA"], ["TypeScript", "LANGUAGE"]
   ],
   analytics: { goatcounter: "" },            // optional: your GoatCounter code, e.g. "alex" for alex.goatcounter.com. "" disables analytics
-  footerNote: "Handmade. Updated November 2026."
+  footerNote: "Handmade. Updated November 2026.",
+
+  // ----- OPTIONAL: fit the page to the person's job. Delete any line you do not need. -----
+  // Rename a section: any of projects, github, episodes, skills, beyond, about, or the id of an extra section.
+  //   title = heading, small = grey text beside it, nav = menu label.
+  sections: {
+    projects: { title: "Featured projects", nav: "Projects" },
+    episodes: { title: "Continue watching", small: "Season 1", nav: "Experience" },
+    skills: { title: "Top 10 in my toolkit", small: "Today" },
+    beyond: { title: "Beyond code", small: "Extras" }
+  },
+  // Order of sections on the page. Ids you leave out follow in the default order.
+  sectionOrder: ["projects", "episodes", "talks", "skills", "github", "beyond", "about"],
+  // Words inside the project popup and experience cards. Change them to suit the role, for example a designer
+  // might use stack: "Tools", arch: "Process", result: "Outcome", role: "My part".
+  labels: { stack: "Built with", arch: "Architecture", result: "Result", role: "My role", diff: "What I'd do differently" },
+  // Names on the "Who's watching?" screen. Use these if "Engineer" does not fit the person's field.
+  // profileNames: { recruiter: "Recruiter", manager: "Hiring Manager", engineer: "Colleague", guest: "Just Browsing" },
+  // heroCta: "Watch my work"        // text of the first hero button
 };
 
 const experience = [                         // newest first. Each company has "episodes" (3 to 5 is ideal)
@@ -227,6 +249,20 @@ const skills = [                             // the "Top 10 in my toolkit" row, 
 /* ====================== END OF CONTENT (do not edit below) ====================== */
 
 /* Helpers: turn colour names into gradients so the content above stays simple. */
+// Your own sections: publications, certifications, courses taught, awards, talks, campaigns, case studies, volunteering...
+// Each section is a row of cards. Remove the whole section if the person has nothing for it.
+//   id: lowercase letters/numbers/dashes     title: heading     small: grey text beside the heading (optional)
+//   items: title (required), text, meta (short label like a year), tag, color, link: { url, label }
+const extraSections = [
+  {
+    id: "talks", title: "Talks & writing", small: "Selected",
+    items: [
+      { title: "Scaling invoice pipelines", text: "A conference talk on moving a billing system to event-driven processing.", meta: "2025", tag: "Conference talk", color: "blue", link: { url: "https://example.com/talk", label: "Watch" } },
+      { title: "Notes on idempotent APIs", text: "A short write-up with the patterns the team adopted.", meta: "2024", tag: "Article", color: "green", link: { url: "https://example.com/post", label: "Read" } }
+    ]
+  }
+];
+
 const PALETTE = {
   red: ["#7a1410", "#e5231b"], blue: ["#14307a", "#2b6be5"], green: ["#0b4d3d", "#12a37f"], purple: ["#4a1a7a", "#9b5be5"],
   gold: ["#7a4a08", "#d9a21b"], pink: ["#5a0f2e", "#d6336c"], lime: ["#1c4a12", "#5aa832"], teal: ["#0d4a5c", "#1fa5c9"],
@@ -236,4 +272,4 @@ function gradient(name, angle) { const c = PALETTE[name] || PALETTE.red; return 
 projects.forEach(p => { p.g = p.g || gradient(p.color, 135); });
 skills.forEach(k => { k.g = k.g || gradient(k.color, 160); });
 
-if (typeof module !== "undefined") module.exports = { site, experience, education, beyond, projects, repos, skills, PALETTE, gradient };
+if (typeof module !== "undefined") module.exports = { site, experience, education, beyond, projects, repos, skills, extraSections, PALETTE, gradient };

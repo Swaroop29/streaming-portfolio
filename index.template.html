@@ -37,12 +37,7 @@
 <header class="top pad" id="top">
   <a class="brand" href="#home">{{BRAND}}</a>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#projects">Projects</a>
-    <a href="#episodes">Experience</a>
-    <a href="#skills">Skills</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+<!--@NAV-->
   </nav>
   <div class="right">
 <!--@RESUME_NAV-->
@@ -57,7 +52,7 @@
 <!--@HERO_META-->
     <p id="tag">{{TAGLINE}}</p>
     <div class="cta">
-      <a class="b play" href="#projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg>Watch my work</a>
+<!--@HERO_CTA-->
       <a class="b info" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 10h2v8h-2zm0-4h2v2h-2z"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z"/></svg>Get in touch</a>
 <!--@RESUME_HERO-->
     </div>
@@ -91,11 +86,7 @@
     <div class="episodes">
 <!--@EXPERIENCE-->
     </div>
-    <aside class="recap" aria-label="Season recap">
-      <div class="eyebrow">SEASON RECAP</div>
-      <h3>By the numbers</h3>
 <!--@RECAP-->
-    </aside>
     </div>
   </section>
 
@@ -136,11 +127,7 @@
 <div id="kb" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" hidden><div class="kb-box"><h3>Keyboard shortcuts</h3><ul><li><kbd>H</kbd> Home</li><li><kbd>W</kbd> Work (projects)</li><li><kbd>E</kbd> Experience</li><li><kbd>S</kbd> Skills</li><li><kbd>A</kbd> About</li><li><kbd>C</kbd> Contact</li><li><kbd>P</kbd> Print view</li><li><kbd>?</kbd> This list</li><li><kbd>Esc</kbd> Close</li></ul><button class="b info" id="kb-close" type="button">Close</button></div></div>
 
 <nav class="tabbar" id="tabbar" aria-label="Sections">
-  <a href="#home" data-s="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></svg>Home</a>
-  <a href="#projects" data-s="projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Work</a>
-  <a href="#episodes" data-s="episodes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg>Experience</a>
-  <a href="#skills" data-s="skills"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 6 6.4.6-4.9 4.3 1.5 6.3L12 17l-5.6 3.2 1.5-6.3L3 9.6 9.4 9z"/></svg>Skills</a>
-  <a href="#contact" data-s="contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4z"/></svg>Contact</a>
+<!--@TABS-->
 </nav>
 
 <!-- project modal -->
@@ -151,13 +138,13 @@
       <div>
         <div class="cta" id="m-links"><a class="b play" id="m-live" href="#" target="_blank" rel="noopener">Live demo</a><a class="b info" id="m-src" href="#" target="_blank" rel="noopener">Source code</a><a class="b info" id="m-blog" href="#" target="_blank" rel="noopener">Read the write-up</a></div>
         <p id="m-problem"></p><p id="m-built"></p>
-        <h5>Architecture</h5><div class="arch" id="m-arch"></div>
-        <h5>What I'd do differently</h5><p id="m-diff"></p>
+        <h5 id="m-arch-l">Architecture</h5><div class="arch" id="m-arch"></div>
+        <h5 id="m-diff-l">What I'd do differently</h5><p id="m-diff"></p>
       </div>
       <dl>
-        <dt>Result</dt><dd id="m-result"></dd>
-        <dt>Built with</dt><dd id="m-stack"></dd>
-        <dt>My role</dt><dd id="m-role"></dd>
+        <dt id="m-result-l">Result</dt><dd id="m-result"></dd>
+        <dt id="m-stack-l">Built with</dt><dd id="m-stack"></dd>
+        <dt id="m-role-l">My role</dt><dd id="m-role"></dd>
       </dl>
     </div>
   </div>

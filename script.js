@@ -123,14 +123,19 @@ function openModal(i) {
   (p.extra || []).forEach(x => { const a = document.createElement('a'); a.className = 'b info xl'; a.target = '_blank'; a.rel = 'noopener'; a.href = x.u; a.textContent = x.l; ml.appendChild(a); });
   ml.style.display = (p.live || p.src || p.blog || (p.extra && p.extra.length)) ? '' : 'none';
   document.getElementById('m-title').textContent = p.t;
-  document.getElementById('m-problem').textContent = 'The problem: ' + p.problem;
-  document.getElementById('m-built').textContent = 'What I built: ' + p.built;
-  document.getElementById('m-result').textContent = p.result;
-  document.getElementById('m-stack').textContent = p.stack;
-  document.getElementById('m-role').textContent = p.role;
-  document.getElementById('m-diff').textContent = p.diff;
-  const df = document.getElementById('m-diff'); df.style.display = p.diff ? '' : 'none'; if (df.previousElementSibling) df.previousElementSibling.style.display = p.diff ? '' : 'none';
+  const L = Object.assign({ problem: 'The problem', built: 'What I built', arch: 'Architecture', diff: "What I'd do differently", result: 'Result', stack: 'Built with', role: 'My role' }, site.labels || {});
+  const show = (id, on) => { const el = document.getElementById(id); if (el) el.style.display = on ? '' : 'none'; };
+  const setText = (id, label, v) => { const el = document.getElementById(id); el.textContent = v ? (label ? label + ': ' : '') + v : ''; el.style.display = v ? '' : 'none'; };
+  setText('m-problem', L.problem, p.problem); setText('m-built', L.built, p.built);
+  [['result', p.result], ['stack', p.stack], ['role', p.role]].forEach(([k, v]) => {
+    document.getElementById('m-' + k + '-l').textContent = L[k]; document.getElementById('m-' + k).textContent = v || '';
+    show('m-' + k + '-l', v); show('m-' + k, v);
+  });
+  document.getElementById('m-diff-l').textContent = L.diff; document.getElementById('m-diff').textContent = p.diff || '';
+  show('m-diff-l', p.diff); show('m-diff', p.diff);
+  document.getElementById('m-arch-l').textContent = L.arch;
   document.getElementById('m-arch').innerHTML = (p.arch || []).map(a => '<span>' + E(a) + '</span>').join('<em>&rarr;</em>');
+  show('m-arch-l', (p.arch || []).length); show('m-arch', (p.arch || []).length);
   modal.classList.add('open'); document.getElementById('m-x').focus();
 }
 function closeModal() { modal.classList.remove('open'); if (lastFocus) lastFocus.focus(); }
@@ -138,11 +143,12 @@ document.getElementById('m-x').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+const PN = site.profileNames || {};
 const profiles = {
-  recruiter: { n: 'Recruiter', i: 'R', c: '#e5231b', tag: site.profileTaglines.recruiter },
-  manager:   { n: 'Manager',   i: 'M', c: '#2b6be5', tag: site.profileTaglines.manager },
-  engineer:  { n: 'Engineer',  i: 'E', c: '#12a37f', tag: site.profileTaglines.engineer },
-  guest:     { n: 'Guest',     i: 'G', c: '#d9a21b', tag: site.profileTaglines.guest }
+  recruiter: { n: PN.recruiter || 'Recruiter', i: 'R', c: '#e5231b', tag: site.profileTaglines.recruiter },
+  manager:   { n: PN.manager || 'Manager',   i: 'M', c: '#2b6be5', tag: site.profileTaglines.manager },
+  engineer:  { n: PN.engineer || 'Engineer',  i: 'E', c: '#12a37f', tag: site.profileTaglines.engineer },
+  guest:     { n: PN.guest || 'Guest',     i: 'G', c: '#d9a21b', tag: site.profileTaglines.guest }
 };
 function pick(id) {
   const p = profiles[id];
@@ -180,7 +186,9 @@ document.body.style.overflow = 'hidden';
 (function () {
   const wall = document.getElementById('wall');
   const grads = ['linear-gradient(160deg,#7a1410,#e5231b)','linear-gradient(160deg,#14307a,#2b6be5)','linear-gradient(160deg,#0b4d3d,#12a37f)','linear-gradient(160deg,#4a1a7a,#9b5be5)','linear-gradient(160deg,#7a4a08,#e8a21b)','linear-gradient(160deg,#6a1040,#e5489b)','linear-gradient(160deg,#0f4a66,#1fb5e0)','linear-gradient(160deg,#2a2a33,#6b6b7a)'];
-  const items = site.ticker;
+  let items = (site.ticker || []).filter(Boolean);
+  if (!items.length) items = projects.map(p => [p.t, 'FEATURED']).concat(skills.map(k => [k.n, 'SKILL']), experience.map(c => [c.company, 'EXPERIENCE']));
+  if (!items.length) items = [[site.name, 'NOW STREAMING'], [site.role, 'ROLE']];
   for (let r = 0; r < 7; r++) {
     const row = document.createElement('div');
     row.className = 'wrow' + (r % 2 ? ' rev' : '') + (r % 3 === 0 ? ' slow' : '');

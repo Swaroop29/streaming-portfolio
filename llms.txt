@@ -89,3 +89,8 @@ Architecture: profile.js -> build -> index.html
 - React (Frontend)
 - Terraform (Infrastructure)
 - Distributed Systems (Backend)
+
+## Talks & writing
+- Scaling invoice pipelines (2025): A conference talk on moving a billing system to event-driven processing. https://example.com/talk
+- Notes on idempotent APIs (2024): A short write-up with the patterns the team adopted. https://example.com/post
+

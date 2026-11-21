@@ -59,6 +59,7 @@
     <a href="#home">Home</a>
     <a href="#projects">Projects</a>
     <a href="#episodes">Experience</a>
+    <a href="#talks">Talks &amp; writing</a>
     <a href="#skills">Skills</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
@@ -95,21 +96,11 @@
 </section>
 
 <main class="pad">
-
   <section class="row" id="projects">
     <h2>Featured projects <small>[4 titles]</small></h2>
     <div class="track-wrap">
       <button class="arrow l" aria-label="Scroll left">&#8249;</button>
       <div class="track" id="t-projects"></div>
-      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
-    </div>
-  </section>
-
-  <section class="row" id="github">
-    <h2>On GitHub <small>example</small></h2>
-    <div class="track-wrap">
-      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
-      <div class="track" id="t-repos"></div>
       <button class="arrow r" aria-label="Scroll right">&#8250;</button>
     </div>
   </section>
@@ -156,11 +147,32 @@
     </div>
   </section>
 
+  <section class="row" id="talks">
+    <h2>Talks &amp; writing <small>Selected</small></h2>
+    <div class="track-wrap">
+      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
+      <div class="track">
+        <a class="repo" href="https://example.com/talk" target="_blank" rel="noopener"><b>Scaling invoice pipelines</b><p>A conference talk on moving a billing system to event-driven processing.</p><div class="m"><i style="--c:#2b6be5">2025</i><span>Conference talk</span></div></a>
+        <a class="repo" href="https://example.com/post" target="_blank" rel="noopener"><b>Notes on idempotent APIs</b><p>A short write-up with the patterns the team adopted.</p><div class="m"><i style="--c:#12a37f">2024</i><span>Article</span></div></a>
+      </div>
+      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
+    </div>
+  </section>
+
   <section class="row top10" id="skills">
     <h2>Top 10 in my toolkit <small>Today</small></h2>
     <div class="track-wrap">
       <button class="arrow l" aria-label="Scroll left">&#8249;</button>
       <div class="track" id="t-skills"></div>
+      <button class="arrow r" aria-label="Scroll right">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="row" id="github">
+    <h2>On GitHub <small>example</small></h2>
+    <div class="track-wrap">
+      <button class="arrow l" aria-label="Scroll left">&#8249;</button>
+      <div class="track" id="t-repos"></div>
       <button class="arrow r" aria-label="Scroll right">&#8250;</button>
     </div>
   </section>
@@ -221,14 +233,15 @@
 </section>
 
 <footer class="pad"><span>Alex Rivera &middot; Software Engineer</span><span><button class="flink" id="kb-open" type="button">Keyboard shortcuts (?)</button> &middot; <button class="flink" id="print-open" type="button">Print view</button> &middot; Handmade. Updated November 2026.</span></footer>
-<details class="textver" id="text-version"><summary>Plain-text version of this portfolio (projects, repositories, skills)</summary>
-<h3>Projects</h3>
+<details class="textver" id="text-version"><summary>Plain-text version of this portfolio (all sections as plain text)</summary>
+<h3>Featured projects</h3>
 <article><h4>Billing Service</h4><p><em>Go · PostgreSQL · Kafka &middot; AT NORTHWIND</em></p><p><b>Problem:</b> Invoices were created by several services, and totals sometimes disagreed.</p><p><b>What I built:</b> A single billing service that owns invoice creation, with idempotent writes and an audit trail.</p><p><b>Result:</b> No invoice disagreements reported after launch</p><p><b>Built with:</b> Go, PostgreSQL, Kafka</p><p><b>My role:</b> Designed and built it with one other engineer</p><p><b>Architecture:</b> API &rarr; Billing service &rarr; Kafka &rarr; Ledger</p><p><b>What I would do differently:</b> I would add contract tests between services earlier.</p></article>
 <article><h4>Release Dashboard</h4><p><em>React · Node.js &middot; INTERN PROJECT</em></p><p><b>Problem:</b> Teams could not see release status without asking each other.</p><p><b>What I built:</b> A dashboard that shows build and release state for every team and alerts on failures.</p><p><b>Result:</b> Used by all engineering teams during my internship</p><p><b>Built with:</b> React, Node.js, PostgreSQL</p><p><b>My role:</b> Built it as an intern</p><p><b>Architecture:</b> CI events &rarr; API &rarr; Dashboard</p></article>
 <article><h4>Task Scheduler</h4><p><em>Go · Distributed systems &middot; FINAL YEAR PROJECT</em></p><p><b>Problem:</b> Running scheduled jobs reliably across several machines is harder than it looks.</p><p><b>What I built:</b> A distributed task scheduler in Go that elects a leader and reassigns work when a node fails.</p><p><b>Result:</b> Awarded the department prize for best project, 2023</p><p><b>Built with:</b> Go, etcd, Docker</p><p><b>My role:</b> Built it as my final year project</p><p><b>Architecture:</b> Client &rarr; Leader &rarr; Workers</p><p><a href="https://github.com/example/task-scheduler">Source code</a></p></article>
 <article><h4>This Portfolio</h4><p><em>HTML · CSS · JS &middot; THIS SITE</em></p><p><b>Problem:</b> A CV is a flat list. I wanted a recruiter, a manager and an engineer to each find what they need quickly.</p><p><b>What I built:</b> A streaming-style portfolio built from one content file, with a build step and automated tests.</p><p><b>Result:</b> Every change is tested on desktop, tablet and phone before it goes live</p><p><b>Built with:</b> HTML, CSS, JavaScript</p><p><b>My role:</b> Designed and built it</p><p><b>Architecture:</b> profile.js &rarr; build &rarr; index.html</p></article>
 <h3>GitHub repositories</h3><ul><li><a href="https://github.com/example/task-scheduler">task-scheduler</a> (Go): A distributed task scheduler in Go.</li><li><a href="https://github.com/example/dotfiles">dotfiles</a> (Shell): My shell and editor setup.</li></ul>
-<h3>Skills</h3><ul><li>Go (Languages)</li><li>Python (Languages)</li><li>AWS (Cloud)</li><li>PostgreSQL (Data)</li><li>Kubernetes (Platform)</li><li>React (Frontend)</li><li>Terraform (Infrastructure)</li><li>Distributed Systems (Backend)</li></ul>
+<h3>Top 10 in my toolkit</h3><ul><li>Go (Languages)</li><li>Python (Languages)</li><li>AWS (Cloud)</li><li>PostgreSQL (Data)</li><li>Kubernetes (Platform)</li><li>React (Frontend)</li><li>Terraform (Infrastructure)</li><li>Distributed Systems (Backend)</li></ul>
+<h3>Talks &amp; writing</h3><ul><li><a href="https://example.com/talk">Scaling invoice pipelines</a> (2025): A conference talk on moving a billing system to event-driven processing.</li><li><a href="https://example.com/post">Notes on idempotent APIs</a> (2024): A short write-up with the patterns the team adopted.</li></ul>
 </details>
 <div id="kb" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" hidden><div class="kb-box"><h3>Keyboard shortcuts</h3><ul><li><kbd>H</kbd> Home</li><li><kbd>W</kbd> Work (projects)</li><li><kbd>E</kbd> Experience</li><li><kbd>S</kbd> Skills</li><li><kbd>A</kbd> About</li><li><kbd>C</kbd> Contact</li><li><kbd>P</kbd> Print view</li><li><kbd>?</kbd> This list</li><li><kbd>Esc</kbd> Close</li></ul><button class="b info" id="kb-close" type="button">Close</button></div></div>
 
@@ -236,7 +249,7 @@
   <a href="#home" data-s="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></svg>Home</a>
   <a href="#projects" data-s="projects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Work</a>
   <a href="#episodes" data-s="episodes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg>Experience</a>
-  <a href="#skills" data-s="skills"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 6 6.4.6-4.9 4.3 1.5 6.3L12 17l-5.6 3.2 1.5-6.3L3 9.6 9.4 9z"/></svg>Skills</a>
+  <a href="#talks" data-s="talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zm3 4v2h8V8zm0 4v2h8v-2z"/></svg>Talks &amp; writing</a>
   <a href="#contact" data-s="contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4z"/></svg>Contact</a>
 </nav>
 
@@ -248,13 +261,13 @@
       <div>
         <div class="cta" id="m-links"><a class="b play" id="m-live" href="#" target="_blank" rel="noopener">Live demo</a><a class="b info" id="m-src" href="#" target="_blank" rel="noopener">Source code</a><a class="b info" id="m-blog" href="#" target="_blank" rel="noopener">Read the write-up</a></div>
         <p id="m-problem"></p><p id="m-built"></p>
-        <h5>Architecture</h5><div class="arch" id="m-arch"></div>
-        <h5>What I'd do differently</h5><p id="m-diff"></p>
+        <h5 id="m-arch-l">Architecture</h5><div class="arch" id="m-arch"></div>
+        <h5 id="m-diff-l">What I'd do differently</h5><p id="m-diff"></p>
       </div>
       <dl>
-        <dt>Result</dt><dd id="m-result"></dd>
-        <dt>Built with</dt><dd id="m-stack"></dd>
-        <dt>My role</dt><dd id="m-role"></dd>
+        <dt id="m-result-l">Result</dt><dd id="m-result"></dd>
+        <dt id="m-stack-l">Built with</dt><dd id="m-stack"></dd>
+        <dt id="m-role-l">My role</dt><dd id="m-role"></dd>
       </dl>
     </div>
   </div>
