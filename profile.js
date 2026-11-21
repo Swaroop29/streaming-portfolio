@@ -81,6 +81,7 @@ const site = {
   footerNote: "Handmade. Updated November 2026.",
 
   // ----- OPTIONAL: fit the page to the person's job. Delete any line you do not need. -----
+  theme: "netflix",                          // the design. See the themes/ folder for what is available.
   // Rename a section: any of projects, github, episodes, skills, beyond, about, or the id of an extra section.
   //   title = heading, small = grey text beside it, nav = menu label.
   sections: {

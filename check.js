@@ -49,6 +49,13 @@ if (site.ticker && site.ticker.length && site.ticker.length < 6) warn('site.tick
 if (site.resume && (site.resume.view || site.resume.download)) for (const k of ['view', 'download']) if (site.resume[k] && !isUrl(site.resume[k])) err('site.resume.' + k + ' must be an https link.');
 if (!site.resume || (!site.resume.view && !site.resume.download)) warn('No resume link set. The Resume and Download buttons are hidden.');
 
+// Theme must exist
+if (site.theme) {
+  const fsx = require('fs'), tdir = path.join(__dirname, 'themes');
+  const known = fsx.readdirSync(tdir).filter(n => fsx.existsSync(path.join(tdir, n, 'theme.js')));
+  if (!known.includes(site.theme)) err('site.theme "' + site.theme + '" does not exist. Available themes: ' + known.join(', '));
+}
+
 // 4. About and contact
 if (!site.about || !((site.about.paragraphs || []).length || (site.about.facts || []).length || education.length)) warn('The About section is empty, so it is hidden. Add site.about.paragraphs if you have a short bio.');
 if (site.about && (site.about.paragraphs || []).length) need(site.about, ['heading'], 'site.about');

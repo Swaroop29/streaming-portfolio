@@ -10,7 +10,9 @@
     "og": "node og.js",
     "test": "node --test tests/*.test.js",
     "e2e": "playwright test",
-    "test:all": "npm test && playwright test"
+    "test:all": "npm test && playwright test",
+    "package": "node package.js",
+    "single": "node package.js --single"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

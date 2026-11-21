@@ -73,12 +73,49 @@ Examples of what to produce:
    - Optional: `npm run og` (needs Chromium) to regenerate the share image `assets/og-image.png`.
 4. Tell the person plainly: which sections you included and why, which you left out because they had no material, what you left blank, and anything you were unsure about, so they can confirm facts before publishing.
 
-## Deploying
+## Publishing (ask the person, then guide or do it)
 
-Build command `npm run build`, output directory `.` (the repository root). Works on Cloudflare Pages, GitHub Pages (commit the generated files) or Netlify. Commit the generated `index.html`, `llms.txt`, `robots.txt` and `sitemap.xml` too, so that hosts without a build step still work.
+When the portfolio is built and checked, **ask how they want to publish**. Offer these options and say which one you recommend. Never create accounts, enter passwords or complete a sign-in for them: give the link, say what to do, and wait until they tell you it is done.
+
+> How would you like to publish your portfolio?
+> **A. Vercel (recommended).** Easiest. Drag one file onto a web page and you get a live link in seconds. The link is temporary until you click "Claim Project" and sign in (a free account, "Sign in with Google" works). After that it is permanent.
+> **B. Netlify.** The same idea: drag and drop, live link at once, free account needed to keep it.
+> **C. GitHub Pages or Cloudflare Pages.** Best if you want your site tied to a code repository and updated automatically. Needs a GitHub or Cloudflare account and a few more steps.
+
+If they have no preference, go with A.
+
+### A. Vercel (default)
+1. Run `npm run single`. It builds the site as ONE self-contained `index.html` (styles, scripts and images inside it) in `publish/`, plus `publish.zip`. Give the person that zip, and if your chat can preview an HTML file, show them the preview first so they can approve it before publishing. If you cannot hand over files, tell them exactly how to get it. (`npm run package` makes the multi-file version instead.)
+2. Send them to **https://vercel.com/drop** and tell them to drag `publish.zip` (or the `publish` folder) onto the page. No Git, no commands, no build settings. A static site works without an account.
+3. They get a live link at once. **Tell them clearly:** the link is temporary and shows a countdown. To keep it, click **Claim Project** and create a free Vercel account before the countdown ends. If it expires, they can sign up and drop the zip again.
+4. Ask them to open the link, check the site, and send you the final address. Then set `site.url` in `profile.js` to that address, run `npm run build` and `npm run check`, run `npm run single` again, and have them drop the new zip onto their project in the Vercel dashboard so the share cards and sitemap use the real address.
+5. To update the site later: edit `profile.js`, run `npm run single`, and drop the new zip onto the project in the Vercel dashboard.
+
+### B. Netlify
+Same files, but use **https://app.netlify.com/drop**. A site can go live without an account, but unclaimed sites are deleted after a short time, so they should sign up to claim it right away.
+
+### C. GitHub Pages or Cloudflare Pages
+Needs an account. Give the sign-up link, say "tell me when this is done", then continue. Build command `npm run build`, output directory `.` (the repository root). Commit the generated `index.html`, `llms.txt`, `robots.txt` and `sitemap.xml`.
+
+### If you can control a browser
+If you have a browser tool and the person is already signed in, you may perform the drop and the claim steps in their browser after they agree. Stop and hand over for passwords, verification codes, payment details or terms they must accept themselves. If you cannot use a browser, give click-by-click instructions instead.
+
+### If you cannot run commands
+Building needs Node.js. If you cannot run commands or create files, tell the person you need an AI with a code or file tool (for example Claude with file creation, Claude Code, or Codex) to finish the build, and give them the finished `profile.js` so nothing is lost.
+
+## Repository layout and themes
+
+- `profile.js` is the person's content. It is the only file you normally edit.
+- `core/` is shared by every design: it loads and checks the profile and writes the share-card tags, structured data, the plain-text version for crawlers, `llms.txt`, `robots.txt` and `sitemap.xml`. Do not edit it to change how the page looks.
+- `themes/<id>/` is one design. Today there is `themes/netflix/` (a streaming-service look). A theme has `theme.json` (name, mood, who it suits), `theme.js` (turns the profile into a page) and its own `style.css`, `print.css` and `script.js`.
+- `npm run build` renders the theme named in `site.theme` (default `netflix`) and writes `index.html` and the theme's files to the repository root. **Those root copies (`index.html`, `style.css`, `print.css`, `script.js`) are generated. Never edit them; edit the theme folder instead.**
+- To use another theme, set `site.theme` in `profile.js` (for example `theme: "netflix"`). `npm run check` lists the available ones if the name is wrong. If the person has not chosen, use the default and say which design you used.
+- To make a new theme, copy `themes/netflix/`, change `theme.json` and the files, and make sure `npm test` passes: every theme is tested against an engineer, a teacher and a minimal profile.
 
 ## How it works (only if you must change code)
 
-- `index.template.html` is the page shell. `build.js` fills it from `profile.js`, keeps only sections that have content, orders and renames them, and writes static, crawlable HTML (so bots and AI agents can read everything without JavaScript) plus `llms.txt`.
-- `script.js` renders projects, repos, skills and the profile picker in the browser.
-- `check.js` validates `profile.js`. `tests/` are unit tests; `e2e/` are Playwright browser tests run in CI.
+- `build.js` loads the profile, picks the theme, and writes the page. `check.js` validates `profile.js`.
+- A theme keeps only the sections that have content, in the chosen order, with their renamed headings, and writes static, crawlable HTML so bots and AI agents can read everything without JavaScript.
+- `themes/netflix/script.js` renders projects, repos, skills and the profile picker in the browser.
+- `core/single.js` inlines everything into one `index.html` for `npm run single`.
+- `tests/` are unit tests; `e2e/` are Playwright browser tests run in CI.
