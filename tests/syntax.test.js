@@ -4,7 +4,7 @@ const assert = require('node:assert');
 const vm = require('vm');
 const { read } = require('./helpers');
 
-for (const file of ['profile.js', 'build.js', 'check.js', 'script.js', 'analytics.js']) {
+for (const file of ['profile.js', 'build.js', 'check.js', 'package.js', 'og.js', 'core/core.js', 'core/single.js', 'core/analytics.js', 'themes/netflix/theme.js', 'themes/netflix/script.js']) {
   test(`${file} is valid JavaScript`, () => {
     assert.doesNotThrow(() => new vm.Script(read(file), { filename: file }));
   });

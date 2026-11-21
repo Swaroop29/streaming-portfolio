@@ -1,0 +1,120 @@
+/* Print view: a clean, black-on-white, résumé-style layout (about 3 pages on A4).
+   Loaded only for printing. Designed to look right even with "Background graphics" turned off. */
+@page { size: A4; margin: 11mm 12mm; }
+
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none !important; transition: none !important; }
+html, body { background: #fff !important; color: #111 !important; font-size: 10pt; overflow: visible !important; }
+body { line-height: 1.35; font-family: var(--body), Arial, sans-serif; }
+a { color: inherit !important; text-decoration: none !important; }
+
+/* Things that only make sense on screen */
+#picker, #intro, header.top, .tabbar, .replay, #modal, #kb, .arrow, #beyond, #contact, footer,
+.billboard::before, .billboard::after, .series, .meta, .bb .cta { display: none !important; }
+
+/* Header: name, one-line pitch, contact details */
+.billboard { min-height: 0 !important; height: auto !important; padding: 0 0 6px !important; background: none !important; display: block !important; border-bottom: 2pt solid #e5231b; margin-bottom: 4px; }
+.bb { max-width: none !important; }
+.bb h1 br { display: none; }
+.bb h1 { font-family: var(--display); font-size: 30pt !important; line-height: 1 !important; margin: 0 0 3px !important; display: flex; gap: .25em; color: #111 !important; text-shadow: none !important; letter-spacing: .02em; }
+.bb #tag { font-size: 10pt !important; color: #333 !important; margin: 3px 0 !important; max-width: none !important; text-shadow: none !important; }
+.bb .stats { display: flex; gap: 18px; margin: 3px 0 !important; color: #111 !important; }
+.bb .stats div { display: flex; gap: 5px; align-items: baseline; }
+.bb .stats b { font-size: 9.5pt !important; font-weight: 700; }
+.bb .stats span { font-size: 8pt !important; color: #555 !important; }
+.bb::after { content: var(--print-contact); display: block; font-size: 8.5pt; color: #333; margin-top: 4px; }
+
+/* Section order for print: experience first, like a CV */
+main { margin: 0 !important; display: flex; flex-direction: column; padding: 0 !important; }
+#episodes { order: 1; } #projects { order: 2; } #skills { order: 3; } #github { order: 4; } #about { order: 5; }
+.row { margin: 0 0 5px !important; padding: 0 !important; }
+.row h2 { font-size: 0 !important; margin: 7px 0 4px !important; padding-bottom: 2px; border-bottom: 1px solid #bbb; break-after: avoid; color: #111 !important; }
+.row h2 small { display: none; }
+.row h2::before { font-family: var(--display); font-size: 13pt; letter-spacing: .06em; }
+#episodes h2::before { content: "Experience"; }
+#projects h2::before { content: "Projects"; }
+#skills h2::before { content: "Skills"; }
+#github h2::before { content: "GitHub"; }
+#about h2::before { content: "About and education"; }
+.track-wrap { position: static; }
+.track { display: grid !important; grid-template-columns: 1fr 1fr; gap: 5px 14px !important; overflow: visible !important; padding: 0 !important; }
+
+/* Projects: text list, no art */
+#t-projects .card { position: static !important; aspect-ratio: auto !important; width: auto !important; flex: none !important; background: none !important; border: 0; border-left: 2pt solid #e5231b; border-radius: 0; padding: 0 0 0 7px !important; overflow: visible; transform: none !important; box-shadow: none !important; display: block; text-align: left; color: #111 !important; break-inside: avoid; }
+#t-projects .card .art, #t-projects .card .no { display: none !important; }
+#t-projects .card .badge { position: static !important; float: right; background: none !important; color: #b00 !important; border: 1px solid #b00; font-size: 6pt; padding: 0 3px; margin-left: 4px; letter-spacing: .08em; }
+#t-projects .card .label { position: static !important; padding: 0 !important; background: none !important; opacity: 1 !important; }
+#t-projects .card .label b { font-family: var(--body) !important; font-weight: 700; font-size: 10pt !important; letter-spacing: 0 !important; color: #111 !important; }
+#t-projects .card .label span { font-size: 8pt !important; color: #555 !important; }
+#t-projects .card .hov { position: static !important; opacity: 1 !important; padding: 0 !important; background: none !important; display: block !important; }
+#t-projects .card .hov p { font-size: 8.5pt !important; color: #222 !important; margin: 1px 0 !important; }
+#t-projects .card .hov .tg { display: flex; flex-wrap: wrap; gap: 0 4px; }
+#t-projects .card .hov .tg i { font-size: 7pt !important; color: #555 !important; border: 0 !important; padding: 0 !important; }
+#t-projects .card .hov .tg i:not(:last-child)::after { content: " \00B7"; }
+
+/* Skills: a compact tag list instead of huge numbered tiles */
+#t-skills { display: flex !important; flex-wrap: wrap; gap: 4px !important; }
+.top10 .card { flex: none !important; width: auto !important; aspect-ratio: auto !important; background: none !important; display: block; overflow: visible; }
+.top10 .big, .top10 .tile::before, .top10 .tile::after { display: none !important; }
+.top10 .tile { position: static !important; width: auto !important; aspect-ratio: auto !important; background: none !important; box-shadow: none !important; padding: 1px 9px !important; border: 1px solid #bbb; border-radius: 10px; flex-direction: row !important; gap: 5px; align-items: baseline; justify-content: flex-start !important; height: auto !important; }
+.top10 .tile b { font-family: var(--body) !important; font-size: 8.5pt !important; font-weight: 700; letter-spacing: 0 !important; color: #111 !important; }
+.top10 .tile span { font-size: 7.5pt !important; color: #666 !important; margin: 0 !important; }
+
+#t-repos { grid-template-columns: repeat(3, 1fr) !important; }
+
+/* GitHub: repo name, one line, and the address (links cannot be clicked on paper) */
+.repo { flex: none !important; background: none !important; border: 0 !important; border-left: 2pt solid #ccc !important; border-radius: 0 !important; padding: 0 0 0 7px !important; display: block; break-inside: avoid; transform: none !important; }
+.repo b { font-size: 9.5pt; color: #111; }
+.repo p { font-size: 8.5pt !important; color: #222 !important; margin: 1px 0 !important; }
+.repo .m { font-size: 7.5pt !important; color: #555 !important; gap: 8px !important; }
+.repo .m i::before { display: none; }
+.repo::after { content: attr(href); font-size: 7pt; color: #777; word-break: break-all; }
+
+/* Experience: employer, then one entry per achievement */
+.ep-layout { display: block !important; max-width: none !important; }
+.episodes { background: none !important; border-radius: 0 !important; }
+.ep-head { padding: 6px 0 2px !important; border: 0 !important; background: none !important; display: flex; justify-content: space-between; break-after: avoid; margin-top: 0 !important; }
+.ep-head h3 { font-family: var(--body); font-size: 11pt; font-weight: 700; letter-spacing: 0; color: #111 !important; }
+.ep-head span { font-size: 8.5pt; color: #555 !important; }
+.ep { display: block !important; padding: 2px 0 2px 9px !important; border: 0 !important; border-left: 2pt solid #ddd !important; margin: 3px 0; break-inside: avoid; background: none !important; }
+.ep .n, .ep .th, .ep .chev, .ep-more { display: none !important; }
+.ep h4 { font-size: 9.5pt !important; margin: 0 !important; color: #111 !important; }
+.ep p { font-size: 8.5pt !important; color: #222 !important; max-width: none !important; }
+.ep .dur { font-size: 7.5pt !important; color: #666 !important; margin: 0 !important; display: block; white-space: normal; }
+.recap { position: static !important; background: none !important; border: 1px solid #ccc !important; border-radius: 0 !important; padding: 5px 8px !important; margin: 6px 0 0 !important; display: grid !important; grid-template-columns: repeat(5, 1fr); gap: 0 10px; break-inside: avoid; }
+.recap .eyebrow { display: none; }
+.recap h3 { grid-column: 1 / -1; font-family: var(--body); font-size: 8pt !important; letter-spacing: .12em; margin: 0 0 3px !important; text-transform: uppercase; color: #555 !important; }
+.recap .stat { padding: 0 !important; border: 0 !important; }
+.recap .stat b { font-family: var(--body) !important; font-size: 11pt !important; font-weight: 700; letter-spacing: 0 !important; color: #111 !important; }
+.recap .stat span { font-size: 7pt !important; color: #555 !important; }
+.recap .now { grid-column: 1 / -1; border: 0 !important; margin: 3px 0 0 !important; padding: 0 !important; font-size: 8pt !important; color: #222 !important; }
+.recap .now i { box-shadow: none !important; width: 6px; height: 6px; margin-right: 5px; }
+.recap .now i::after { display: none; }
+
+/* About and education */
+.about { display: block !important; background: none !important; padding: 0 !important; border-radius: 0 !important; max-width: none !important; }
+.about .eyebrow { display: none; }
+.about h3 { font-family: var(--body); font-size: 10.5pt !important; font-weight: 700; margin: 0 0 2px !important; letter-spacing: 0; color: #111 !important; }
+.about p { font-size: 9pt !important; color: #222 !important; margin: 0 0 4px !important; }
+.about dl { display: grid; grid-template-columns: 62px 1fr; gap: 1px 8px; font-size: 8.5pt !important; margin: 5px 0 !important; }
+.about dt { color: #555 !important; margin: 0 !important; font-size: 8.5pt !important; }
+.about dd { margin: 0 !important; color: #222 !important; }
+.edu { border: 0 !important; padding-top: 4px !important; }
+.edu h4 { font-family: var(--body); font-size: 10pt !important; font-weight: 700; margin: 0 0 3px !important; letter-spacing: 0; color: #111 !important; }
+.edu h4 small { display: none; }
+.tl { padding-left: 0 !important; display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.tl::before, .tl::after { display: none !important; }
+.tl li { opacity: 1 !important; transform: none !important; padding-bottom: 6px !important; break-inside: avoid; }
+.tl li { border-left: 2pt solid #e5231b; padding-left: 8px !important; }
+.tl li::before { display: none !important; }
+.tl .when { font-size: 7pt !important; }
+.tl h5 { font-size: 9.5pt !important; margin: 1px 0 !important; color: #111 !important; }
+.tl .where { font-size: 8pt !important; color: #555 !important; margin-bottom: 2px !important; }
+.tl .chev { display: none !important; }
+.tl .more { grid-template-rows: 1fr !important; }
+.tl .more-in { overflow: visible !important; }
+.tl .more-in p { font-size: 8.5pt !important; margin: 3px 0 0 !important; padding-left: 6px !important; border-left: 1px solid #e5231b !important; max-width: none !important; }
+.tl .chips { gap: 4px !important; margin-top: 3px; }
+.tl .chips span { font-size: 7.5pt !important; padding: 0 7px !important; background: none !important; border: 1px solid #ccc !important; color: #111 !important; }
+
+/* A pointer to the full version, since this view leaves out the detail pages */
+body::after { content: var(--print-footer); display: block; margin-top: 8px; font-size: 8pt; color: #666; text-align: center; }

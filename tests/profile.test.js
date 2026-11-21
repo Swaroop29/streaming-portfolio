@@ -148,3 +148,12 @@ test('the checker validates custom sections', () => {
   assert.strictEqual(r.status, 1);
   for (const needle of ['already used by the page', 'no items', 'https link', 'not a section']) assert.ok(r.stdout.includes(needle), 'checker did not report: ' + needle + '\n' + r.stdout);
 });
+
+test('npm run package collects every file the page needs into one folder', () => {
+  const out = fs.mkdtempSync(os.tmpdir() + '/pub-') + '/publish';
+  execFileSync('node', ['package.js'], { cwd: root, stdio: 'ignore', env: { ...process.env, PORTFOLIO_PUBLISH: out } });
+  for (const f of ['index.html', 'style.css', 'print.css', 'script.js', 'profile.js', 'llms.txt', 'robots.txt', 'sitemap.xml', 'assets/jingle.mp3', 'assets/avatar-guest.webp']) {
+    assert.ok(fs.existsSync(out + '/' + f), f + ' is missing from the publish folder');
+  }
+  assert.ok(!fs.existsSync(out + '/build.js') && !fs.existsSync(out + '/node_modules'), 'build tools are not published');
+});

@@ -25,7 +25,7 @@ function boot() {
   const noop = new Proxy(function () {}, { get: (t, k) => (k === 'measureText' ? () => ({ width: 0 }) : noop), set: () => true, apply: () => noop });
   w.HTMLCanvasElement.prototype.getContext = () => noop;
   const ctx = dom.getInternalVMContext();
-  for (const f of ['profile.js', 'script.js', 'analytics.js']) new vm.Script(read(f), { filename: f }).runInContext(ctx);
+  for (const f of ['profile.js', 'script.js', 'core/analytics.js']) new vm.Script(read(f), { filename: f }).runInContext(ctx);
   return { w, sent, errors };
 }
 

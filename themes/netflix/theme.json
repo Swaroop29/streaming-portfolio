@@ -1,0 +1,9 @@
+{
+  "id": "netflix",
+  "name": "Streaming",
+  "description": "A streaming-service look: pick a profile, then browse rows of cards for projects, experience and more. Dark, bold and playful.",
+  "mood": ["bold", "playful", "dark", "cinematic"],
+  "bestFor": ["software engineers", "designers", "product people", "anyone who wants to stand out"],
+  "features": ["profile picker", "project popups", "rows of cards", "custom sections", "works without JavaScript for crawlers"],
+  "files": ["style.css", "print.css", "script.js"]
+}
