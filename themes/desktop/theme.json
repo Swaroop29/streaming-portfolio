@@ -1,0 +1,9 @@
+{
+  "id": "desktop",
+  "name": "Desktop",
+  "description": "Your portfolio as a tiny computer desktop: folders open into draggable, resizable windows, and a built-in terminal answers commands like projects and contact. On a phone each window opens full screen. Without JavaScript every window is simply a readable section.",
+  "mood": ["playful", "hands-on", "clever", "interactive"],
+  "bestFor": ["front-end engineers", "creative technologists", "game and tools developers", "anyone who wants a portfolio people play with"],
+  "features": ["draggable windows", "resizable windows", "built-in terminal", "keyboard friendly", "full-screen windows on phones", "custom sections", "works without JavaScript"],
+  "files": ["style.css", "script.js"]
+}

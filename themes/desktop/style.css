@@ -1,0 +1,109 @@
+/* Desktop theme: a small computer desktop. Windows are real sections, so the page also works without JavaScript. */
+:root { --wall: #12363f; --bar: #0b252c; --pane: #f3f5f2; --ink: #17242a; --muted: #52636b; --line: #d3dbd7; --link: #0b5f73; --focus: #e09f00; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); font: 15px/1.55 "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; background-color: var(--wall); background-image: radial-gradient(rgba(255, 255, 255, .09) 1px, transparent 1px); background-size: 22px 22px; min-height: 100vh; }
+a { color: var(--link); }
+.skip { position: absolute; left: -999px; top: 0; background: #fff; padding: .5rem 1rem; z-index: 99; }
+.skip:focus { left: 0; }
+.menubar { position: fixed; top: 0; left: 0; right: 0; height: 2.2rem; display: flex; align-items: center; gap: .9rem; padding: 0 1rem; background: var(--bar); color: #e4f1ee; font-size: 13px; z-index: 200; }
+.mrole { color: #a9c7c1; }
+.clock { margin-left: auto; color: #a9c7c1; font-variant-numeric: tabular-nums; }
+main { position: relative; padding-top: 2.2rem; }
+
+/* Without JavaScript: icons are a row of links, windows are stacked sections. */
+.icons { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem; max-width: 52rem; margin: 0 auto; }
+.icon { color: #e4f1ee; text-decoration: none; font-size: 13px; padding: .3rem .7rem; border: 1px solid rgba(255, 255, 255, .3); border-radius: 999px; }
+.icon i { display: none; }
+.windows { max-width: 52rem; margin: 0 auto; padding: 0 1rem 1rem; }
+.win { background: var(--pane); border-radius: 10px; overflow: hidden; margin-bottom: 1.2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
+.win .bar { display: flex; align-items: center; gap: .6rem; height: 2.2rem; padding: 0 .7rem; color: #fff; background-color: var(--c1); background-image: linear-gradient(90deg, var(--c1), var(--c2)); }
+.win .bar h2 { margin: 0; flex: 1; font-size: 13px; font-weight: 700; letter-spacing: .01em; }
+.win .bar button { display: none; }
+.pane { padding: 1rem 1.2rem 1.2rem; }
+.term-win, .js-only { display: none; }
+footer { max-width: 52rem; margin: 0 auto; padding: 0 1rem 2rem; color: #a9c7c1; font-size: 13px; }
+footer a { color: #8fd3e6; }
+details.textver summary { cursor: pointer; }
+
+/* Window contents */
+h1 { margin: 0; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.05; letter-spacing: -.02em; }
+.role { margin: .2rem 0 .8rem; color: var(--muted); font-weight: 600; }
+.lede { margin: 0 0 .9rem; font-size: 1.1rem; max-width: 34rem; }
+.hint { color: var(--muted); font-size: .9rem; }
+kbd { font: .85em ui-monospace, Menlo, Consolas, monospace; background: #e3e9e6; border: 1px solid var(--line); border-radius: 4px; padding: 0 .35em; }
+.chip { display: inline-block; padding: .05rem .6rem; border: 1px solid var(--line); border-radius: 999px; font-size: .78rem; color: var(--muted); background: #fff; }
+.stats { display: flex; flex-wrap: wrap; gap: .6rem 1.8rem; list-style: none; padding: 0; margin: .9rem 0; }
+.stats b { display: block; font-size: 1.5rem; line-height: 1.1; }
+.stats span { color: var(--muted); font-size: .82rem; }
+h3 { margin: 1.2rem 0 .1rem; font-size: 1rem; } h3:first-child { margin-top: 0; }
+.meta { color: var(--muted); font-size: .85rem; margin: 0 0 .5rem; }
+p { margin: 0 0 .65rem; }
+ul { margin: .2rem 0 .7rem; padding-left: 1.1rem; }
+ul.list, ul.tags { list-style: none; padding: 0; }
+ul.list li { margin-bottom: .8rem; }
+ul.tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+ul.tags li { padding: .2rem .65rem; background: #fff; border: 1px solid var(--line); border-radius: 6px; font-weight: 600; font-size: .88rem; }
+ul.tags small { margin-left: .45rem; color: var(--muted); font-weight: 400; }
+dl.facts { display: grid; grid-template-columns: 7.5rem 1fr; gap: .3rem 1rem; margin: .8rem 0 0; }
+dl.facts dt { color: var(--muted); } dl.facts dd { margin: 0; }
+.btn { display: inline-block; padding: .5rem 1rem; background: var(--ink); color: #fff; border-radius: 6px; text-decoration: none; font-weight: 600; }
+details.item { border-bottom: 1px solid var(--line); }
+details.item summary { display: block; padding: .6rem 0 .6rem 1.2rem; cursor: pointer; position: relative; list-style: none; }
+details.item summary::-webkit-details-marker { display: none; }
+details.item summary::before { content: ""; position: absolute; left: .1rem; top: 1.05rem; border: 5px solid transparent; border-left-color: var(--muted); transition: transform .15s; }
+details.item[open] summary::before { transform: rotate(90deg) translateX(2px); }
+details.item .t { display: block; font-weight: 700; }
+details.item .s { display: block; color: var(--muted); font-size: .85rem; }
+details.item .in { padding: 0 0 .8rem 1.2rem; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* With JavaScript: a real desktop. */
+.js .js-only { display: block; }
+.js .menubar .clock { display: block; }
+.js main { display: flex; flex-direction: column; min-height: 100vh; }
+.js .icons { position: absolute; left: .8rem; top: 3.1rem; display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: .6rem .2rem; max-height: calc(100vh - 3.6rem); padding: 0; margin: 0; max-width: none; z-index: 2; }
+.js .icon { display: flex; flex-direction: column; align-items: center; gap: .3rem; width: 5.6rem; padding: .3rem; border: 0; border-radius: 8px; text-align: center; text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
+.js .icon:hover { background: rgba(255, 255, 255, .1); }
+.js .icon i { display: block; position: relative; width: 3.1rem; height: 2.3rem; border-radius: 3px 7px 6px 6px; background-color: var(--c1); background-image: linear-gradient(135deg, var(--c1), var(--c2)); box-shadow: 0 2px 6px rgba(0, 0, 0, .4); }
+.js .icon i::before { content: ""; position: absolute; left: 0; top: -.35rem; width: 1.3rem; height: .5rem; border-radius: 3px 3px 0 0; background: var(--c1); }
+.js .icon i.term::after { content: ">_"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--c2); font: 700 .95rem ui-monospace, Menlo, Consolas, monospace; text-shadow: none; }
+.js .windows { position: relative; flex: 1; width: 100%; max-width: none; min-height: calc(100vh - 7rem); margin: 0; padding: 0; overflow: hidden; }
+.js .win { position: absolute; display: none; flex-direction: column; width: 34rem; max-width: calc(100% - 1rem); height: min(30rem, calc(100% - 3rem)); margin: 0; resize: both; box-shadow: 0 14px 40px rgba(0, 0, 0, .45); }
+.js .win.welcome { width: 36rem; height: min(27rem, calc(100% - 3rem)); }
+.js .win.open { display: flex; }
+.js .win.on { box-shadow: 0 0 0 2px var(--focus), 0 18px 48px rgba(0, 0, 0, .55); }
+.js .win .bar { flex: none; cursor: grab; touch-action: none; user-select: none; }
+.js .win .bar:active { cursor: grabbing; }
+.js .win .bar button { display: grid; place-items: center; flex: none; width: 1.15rem; height: 1.15rem; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .28); color: #fff; font-size: 13px; line-height: 1; cursor: pointer; }
+.js .win .bar button:hover { background: rgba(255, 255, 255, .5); }
+.js .win .bar h2 { text-align: center; }
+.js .win .pane { flex: 1; overflow: auto; min-height: 0; }
+.js .win.max { left: 0 !important; top: 0 !important; width: 100% !important; max-width: none; height: 100% !important; border-radius: 0; resize: none; }
+.js .term-win { display: none; width: 30rem; }
+.js .term-win.open { display: flex; }
+.js .term-win .pane { background: #0d1b1f; color: #d2efe3; font: 13.5px/1.5 ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace; }
+.js .term-win .out p { margin: 0 0 .15rem; white-space: pre-wrap; }
+.js .term-win .out .cmd { color: #f0c866; } .js .term-win .out .err { color: #ff9d8f; }
+.js .term-win .prompt { display: flex; gap: .5rem; } .js .term-win .prompt span { color: #3ddc97; }
+.js .term-win input { flex: 1; min-width: 0; background: transparent; border: 0; color: #fff; font: inherit; caret-color: #f0c866; }
+.js .term-win input:focus { outline: none; }
+.js footer { max-width: none; padding: .6rem 1rem; }
+
+@media (max-width: 760px) {
+  .mrole { display: none; }
+  .js .icons { position: static; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: .4rem; padding: 1rem .6rem; }
+  .js .windows { min-height: 0; flex: 0; overflow: visible; }
+  .js .win.open { position: fixed; inset: 2.2rem 0 0 0; width: auto; max-width: none; height: auto; border-radius: 0; resize: none; z-index: 150 !important; }
+  .js .win.welcome { width: auto; height: auto; }
+  .js .win .bar { cursor: default; } .js .win .bar .grow { display: none; }
+  dl.facts { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { details.item summary::before { transition: none; } }
+@media print {
+  :root { --wall: #fff; --pane: #fff; --ink: #000; --muted: #333; --line: #bbb; --link: #000; }
+  body { background: #fff; } .menubar, .icons, .term-win, .skip, .win .bar button { display: none !important; }
+  main { padding-top: 0; } .windows, .js .windows { display: block !important; min-height: 0; overflow: visible; padding: 0; max-width: none; }
+  .win, .js .win { position: static !important; display: block !important; width: auto !important; height: auto !important; box-shadow: none; border-radius: 0; margin-bottom: .8rem; break-inside: avoid-page; }
+  .win .bar { background: none !important; color: #000; border-bottom: 1px solid #000; } .js .term-win { display: none !important; }
+  details.item .in { display: block; } footer { color: #333; } .chip, ul.tags li { background: none; }
+}
