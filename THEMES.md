@@ -41,11 +41,11 @@ npx playwright test e2e/themes.spec.js   # phones, tablets, laptops: no errors, 
 Look at it yourself on a narrow and a wide screen before you hand it over. Then set `site.theme: "<new-id>"` in the person's `profile.js`.
 
 ## 6. Styles worth building
-The tests make it safe to add any of these, and each can be built in one sitting:
+Built so far: `netflix`, `editorial`, `shelves`. The tests make it safe to add any of these, and each can be built in one sitting:
 
 | id | Idea | Best for |
 |---|---|---|
-| `shelves` | A dark video-store look: a hero banner for the featured project and shelves you scroll sideways | engineers, designers, anyone who wants to stand out |
+| `shelves` (built) | A dark video-store look: a hero banner for the featured project and shelves you scroll sideways | engineers, designers, anyone who wants to stand out |
 | `desktop` | An operating-system desktop: icons that open draggable windows for projects, experience and about | front-end engineers, creative technologists |
 | `terminal` | A command line that answers `projects`, `experience`, `contact`, with a plain list for people who do not type | developers, security, DevOps |
 | `playlist` | A music-player layout: projects as tracks, experience as albums | creatives, marketers, founders |

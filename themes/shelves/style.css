@@ -1,0 +1,72 @@
+/* Shelves theme: dark side menu, hero banner, sideways shelves, pop-up cards. */
+:root { --bg: #0b1220; --panel: #121b2e; --ink: #e8eefc; --muted: #9fb0cf; --line: #22304a; --accent: #38bdf8; --rail: 15rem; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); }
+.skip { position: absolute; left: -999px; top: 0; background: #fff; color: #000; padding: .5rem 1rem; z-index: 9; }
+.skip:focus { left: 0; }
+.rail { position: fixed; inset: 0 auto 0 0; width: var(--rail); background: #0a0f1b; border-right: 1px solid var(--line); padding: 1.6rem 1rem; display: flex; flex-direction: column; gap: 1.4rem; z-index: 5; }
+.brand { font: 800 1.15rem/1 system-ui, sans-serif; letter-spacing: .22em; color: var(--accent); }
+.rail .links { display: flex; flex-direction: column; gap: .15rem; }
+.rail .links a { color: var(--muted); text-decoration: none; padding: .55rem .8rem; border-radius: 8px; font-weight: 600; }
+.rail .links a:hover, .rail .links a.on { background: var(--panel); color: var(--ink); }
+main { margin-left: var(--rail); padding-bottom: 3rem; }
+.hero { min-height: 62vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 4rem 3rem 3rem; background: radial-gradient(1200px 500px at 85% 0%, #1b3d6b 0%, transparent 60%), linear-gradient(180deg, #0f2a4a 0%, var(--bg) 100%); }
+.eyebrow { margin: 0 0 .4rem; color: var(--accent); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; }
+h1 { margin: 0 0 .6rem; font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1; letter-spacing: -.02em; }
+.lede { max-width: 38rem; margin: 0 0 1rem; font-size: 1.2rem; color: #cfdcf5; }
+.chip { display: inline-block; padding: .1rem .65rem; border: 1px solid var(--line); border-radius: 999px; font-size: .78rem; color: var(--muted); background: rgba(255, 255, 255, .04); }
+.stats { display: flex; flex-wrap: wrap; gap: 1rem 2rem; list-style: none; padding: 0; margin: 1rem 0; }
+.stats b { display: block; font-size: 1.6rem; line-height: 1.1; }
+.stats span { color: var(--muted); font-size: .85rem; }
+.btn { display: inline-block; padding: .65rem 1.4rem; border-radius: 8px; background: var(--accent); color: #04121f; font-weight: 700; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.shelf { padding: 2rem 0 .5rem 3rem; }
+.shelf h2 { margin: 0 0 .9rem; font-size: 1.25rem; }
+.track { display: flex; gap: 1rem; overflow-x: auto; padding: .2rem 3rem 1.2rem 0; scroll-snap-type: x proximity; scrollbar-color: var(--line) transparent; }
+.card { flex: 0 0 15.5rem; scroll-snap-align: start; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: .7rem .7rem 1rem; transition: transform .15s, border-color .15s; }
+.js .card { cursor: pointer; }
+.js .card:hover, .card:focus-visible { transform: translateY(-4px); border-color: var(--accent); outline: none; }
+.thumb { height: 8.5rem; border-radius: 8px; display: flex; align-items: flex-end; padding: .6rem; margin-bottom: .7rem; }
+.thumb span { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .72rem; background: rgba(0, 0, 0, .45); padding: .15rem .5rem; border-radius: 4px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.thumb span:empty { display: none; }
+.card h3 { margin: 0 0 .15rem; font-size: 1.02rem; line-height: 1.3; }
+.sub { margin: 0; color: var(--muted); font-size: .85rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.detail { margin-top: .7rem; font-size: .9rem; border-top: 1px solid var(--line); padding-top: .6rem; }
+.detail:empty { display: none; }
+.js .card .detail { display: none; }
+.detail p { margin: 0 0 .5rem; }
+.detail ul { margin: .3rem 0 .6rem; padding-left: 1.1rem; }
+.meta { color: var(--muted); font-size: .85rem; }
+.about { max-width: 46rem; padding-right: 3rem; }
+dl.facts { display: grid; grid-template-columns: 9rem 1fr; gap: .3rem 1rem; }
+dl.facts dt { color: var(--muted); } dl.facts dd { margin: 0; }
+footer { padding: 2rem 3rem 0; color: var(--muted); font-size: .85rem; }
+details.textver summary { cursor: pointer; }
+dialog { width: min(40rem, 92vw); max-height: 86vh; overflow: auto; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 16px; padding: 0; }
+dialog::backdrop { background: rgba(3, 7, 15, .75); }
+dialog .body { padding: 0 1.4rem 1.4rem; }
+.pop-thumb { height: 9rem; margin: 0 -1.4rem 1rem; }
+dialog .x { position: absolute; right: .8rem; top: .6rem; border: 0; background: rgba(0, 0, 0, .5); color: #fff; width: 2.2rem; height: 2.2rem; border-radius: 50%; font-size: 1.4rem; cursor: pointer; z-index: 2; }
+dialog .pop-detail { border: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 760px) {
+  :root { --rail: 0px; }
+  .rail { inset: auto 0 0 0; width: auto; flex-direction: row; padding: .4rem .5rem; border-right: 0; border-top: 1px solid var(--line); }
+  .brand { display: none; }
+  .rail .links { flex-direction: row; overflow-x: auto; width: 100%; }
+  .rail .links a { white-space: nowrap; padding: .55rem .7rem; }
+  main { margin-left: 0; padding-bottom: 5rem; }
+  .hero { padding: 2.6rem 1.2rem 2rem; min-height: 50vh; }
+  .shelf { padding-left: 1.2rem; } .track { padding-right: 1.2rem; } .about { padding-right: 1.2rem; } footer { padding: 2rem 1.2rem 0; }
+  dl.facts { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card { transition: none; } }
+@media print {
+  :root { --bg: #fff; --ink: #000; --muted: #333; --panel: #fff; --line: #bbb; --accent: #000; }
+  .rail, .cta, dialog, .skip { display: none; } main { margin: 0; } body { background: #fff; color: #000; }
+  .hero { background: none; min-height: 0; padding: 1rem 0; } .lede { color: #000; }
+  .track { display: block; overflow: visible; padding: 0; } .card { margin-bottom: .6rem; break-inside: avoid; } .thumb { display: none; } .js .card .detail { display: block; }
+  .shelf { padding-left: 0; } .chip { background: none; } a { color: #000; }
+}

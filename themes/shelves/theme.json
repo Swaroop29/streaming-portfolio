@@ -1,0 +1,9 @@
+{
+  "id": "shelves",
+  "name": "Shelves",
+  "description": "A dark video-store look with a side menu, a big hero banner for you, and shelves of cards you scroll sideways. Tap any card to open its full story in a pop-up. Without JavaScript every card simply shows all of its text.",
+  "mood": ["bold", "cinematic", "dark", "interactive"],
+  "bestFor": ["software engineers", "designers", "product people", "founders", "anyone who wants an app-like portfolio"],
+  "features": ["side menu", "hero banner", "sideways shelves", "pop-up cards", "keyboard friendly", "custom sections", "works without JavaScript"],
+  "files": ["style.css", "script.js"]
+}

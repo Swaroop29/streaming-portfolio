@@ -109,7 +109,7 @@ Run `npm run themes` to list the designs in `themes/` with their mood and who th
 1. Ask in one line what role they have and what feel they want ("bold and playful", "calm and serious", and so on).
 2. Recommend the one or two themes whose `bestFor` and `mood` fit, and say why in a sentence.
 3. If they want to compare, build each candidate (set `site.theme`, run `npm run build`) and show them the page, then keep their choice in `site.theme`.
-4. If they have no preference, use `netflix` for engineers, designers and product people, and `editorial` for researchers, writers, lawyers, consultants and teachers. Every theme shows the same content, so switching later costs nothing.
+4. If they have no preference, use `netflix` or `shelves` for engineers, designers and product people, and `editorial` for researchers, writers, lawyers, consultants and teachers. Every theme shows the same content, so switching later costs nothing.
 
 ### If the design they want does not exist
 If the person asks for a look that is not in `themes/` ("a Prime-style one", "like a terminal", "an app-store look"), **build it**. Read `THEMES.md`, copy a working theme, give the new theme a descriptive id (not a brand name), and run the tests until they pass. Be inspired by the look, never copy a brand's logo, name or assets. Then show the person the result and set `site.theme`.
