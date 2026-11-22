@@ -111,6 +111,9 @@ Run `npm run themes` to list the designs in `themes/` with their mood and who th
 3. If they want to compare, build each candidate (set `site.theme`, run `npm run build`) and show them the page, then keep their choice in `site.theme`.
 4. If they have no preference, use `netflix` for engineers, designers and product people, and `editorial` for researchers, writers, lawyers, consultants and teachers. Every theme shows the same content, so switching later costs nothing.
 
+### If the design they want does not exist
+If the person asks for a look that is not in `themes/` ("a Prime-style one", "like a terminal", "an app-store look"), **build it**. Read `THEMES.md`, copy a working theme, give the new theme a descriptive id (not a brand name), and run the tests until they pass. Be inspired by the look, never copy a brand's logo, name or assets. Then show the person the result and set `site.theme`.
+
 ## Steps
 
 1. Read `profile.js` fully. It is commented and shows every field and option with sample data.
@@ -131,7 +134,7 @@ Run `npm run themes` to list the designs in `themes/` with their mood and who th
 
 - [ ] I said which resume file I used and its date.
 - [ ] I opened every link in the resume and every link the person gave me, including LinkedIn, GitHub, YouTube, articles, papers and demos, and followed the useful ones one level deeper.
-- [ ] I chose the design with the person (`npm run themes`) and set `site.theme`.
+- [ ] I chose the design with the person (`npm run themes`) and set `site.theme`. If they wanted a look that did not exist, I built it from `THEMES.md` and the tests pass.
 - [ ] I asked the one short question about what is missing, or said what I left out.
 - [ ] Jobs, internships, projects, awards and publications from LinkedIn and GitHub that the resume omits are included when the person's own pages show them.
 - [ ] Every date, title and award matches between sources, or the conflict is listed for the person.

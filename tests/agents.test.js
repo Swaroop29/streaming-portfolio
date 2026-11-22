@@ -29,3 +29,12 @@ test('npm run check reminds the AI about the checklist when the profile is fine'
   const r = spawnSync('node', ['check.js', 'tests/fixtures/minimal-profile.js'], { cwd: require('./helpers').root, encoding: 'utf8' });
   assert.match(r.stdout, /Final checklist/);
 });
+
+test('the recipe for building a new theme exists and AGENTS.md points to it', () => {
+  const guide = read('THEMES.md');
+  for (const word of ['theme.json', 'render\\(data\\)', 'static HTML', 'never copy', 'npm test', 'prefers-reduced-motion', 'text-version']) {
+    assert.ok(new RegExp(word, 'i').test(guide), 'THEMES.md is missing: ' + word);
+  }
+  assert.match(md, /does not exist/);
+  assert.match(md, /THEMES\.md/);
+});
