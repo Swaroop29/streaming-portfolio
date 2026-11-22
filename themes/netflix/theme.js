@@ -117,7 +117,7 @@ function render(d) {
     about: { title: 'Cast & crew', small: 'More info', nav: 'About', tab: 'About', has: aboutHtml.trim().length > 0 }
   };
   // A "Top N" title always matches the real number of skills, so a short list is never labelled "Top 10".
-  const fixTop = (t, n) => t.replace(/^Top\s*\d+\s*/i, n >= 3 ? 'Top ' + n + ' ' : '').replace(/^[a-z]/, ch => ch.toUpperCase());
+  const fixTop = core.fixTop;
   extraSections.forEach(x => { SEC[x.id] = { title: x.title, small: x.small || '', nav: x.nav || x.title, tab: x.nav || x.title, has: (x.items || []).length > 0, custom: x }; });
   Object.keys(site.sections || {}).forEach(id => { if (SEC[id]) Object.assign(SEC[id], site.sections[id]); });
   SEC.skills.title = fixTop(SEC.skills.title, skills.length);

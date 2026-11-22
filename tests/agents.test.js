@@ -6,7 +6,7 @@ const { read } = require('./helpers');
 const md = read('AGENTS.md');
 
 test('AGENTS.md keeps the sections an AI needs', () => {
-  for (const h of ['## Hard rules', '## Ask once before you build', '## Fetching the data', '## The hero numbers and work experience', '## Keep rows and cards flexible', '## Final checklist', '## Publishing']) {
+  for (const h of ['## Hard rules', '## Choose the design', '## Ask once before you build', '## Fetching the data', '## The hero numbers and work experience', '## Keep rows and cards flexible', '## Final checklist', '## Publishing']) {
     assert.ok(md.includes(h), 'missing section: ' + h);
   }
 });

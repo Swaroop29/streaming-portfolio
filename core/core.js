@@ -94,4 +94,7 @@ const md = '# ' + site.name + '\n\n> ' + site.role + '. Portfolio: ' + SITE + '\
   return { 'llms.txt': md, 'robots.txt': 'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n', 'sitemap.xml': '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>' + SITE + '/</loc></url>\n  <url><loc>' + SITE + '/llms.txt</loc></url>\n</urlset>\n' };
 }
 
-module.exports = { load, esc, hostPath, siteUrl, headMeta, jsonLd, projectHtml, analyticsTags, textVersion, seoFiles };
+// A "Top N" title always matches the real number of items, so a short list is never labelled "Top 10". Fewer than 3 drops the number.
+function fixTop(title, n) { return String(title).replace(/^Top\s*\d+\s*/i, n >= 3 ? 'Top ' + n + ' ' : '').replace(/^[a-z]/, ch => ch.toUpperCase()); }
+
+module.exports = { fixTop, load, esc, hostPath, siteUrl, headMeta, jsonLd, projectHtml, analyticsTags, textVersion, seoFiles };

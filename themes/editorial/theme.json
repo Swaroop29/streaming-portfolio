@@ -1,0 +1,9 @@
+{
+  "id": "editorial",
+  "name": "Editorial",
+  "description": "A quiet, typographic page in the style of a printed article: a light background, serif headings and one narrow reading column. It loads instantly, prints cleanly and works without any JavaScript.",
+  "mood": ["calm", "serious", "light", "typographic"],
+  "bestFor": ["researchers and academics", "writers and journalists", "lawyers and consultants", "teachers", "anyone who wants to be read, not scrolled past"],
+  "features": ["single reading column", "serif typography", "prints cleanly", "no JavaScript", "custom sections", "readable by search engines and AI agents"],
+  "files": ["style.css"]
+}

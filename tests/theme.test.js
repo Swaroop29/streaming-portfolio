@@ -73,7 +73,7 @@ test('the checker rejects a theme that does not exist', () => {
   fs.writeFileSync(f, 'const m = require(' + JSON.stringify(root + '/tests/fixtures/teacher-profile.js') + '); m.site.theme = "nope"; module.exports = m;');
   const r = spawnSync('node', ['check.js', f], { cwd: root, encoding: 'utf8' });
   assert.strictEqual(r.status, 1);
-  assert.match(r.stdout, /site\.theme "nope" does not exist\. Available themes: netflix/);
+  assert.match(r.stdout, /site\.theme "nope" does not exist\. Available themes: .*netflix/);
 });
 
 // Flexible rows: the toolkit title follows the real count, and an education stop only gets a dropdown when it has details.
@@ -107,4 +107,21 @@ test('an education stop has a dropdown only when it has details', () => {
   const none = buildVariant((p) => { p.education = [{ level: 'Undergraduate', title: 'BSc', school: 'Uni', period: '2020', extra: '', chips: [], details: [] }]; });
   assert.doesNotMatch(none, /<h5>[^<]*<i class="chev"/);
   assert.doesNotMatch(none, /Tap a stop to open it/);
+});
+
+test('every theme corrects a "Top N" skills title to the real number of skills', () => {
+  for (const id of themes) {
+    const out = fs.mkdtempSync(os.tmpdir() + '/top-');
+    build(id, 'profile.js', out);
+    const html = fs.readFileSync(out + '/index.html', 'utf8');
+    const n = require(path.join(root, 'profile.js')).skills.length;
+    assert.ok(html.includes('Top ' + n + ' in my toolkit') || !/Top 10 in my toolkit/.test(html), id + ' shows a wrong "Top N" title');
+    assert.doesNotMatch(html, n === 10 ? /^$/ : /Top 10 in my toolkit/, id + ' still says Top 10');
+  }
+});
+
+test('npm run themes lists every theme with its description', () => {
+  const out = execFileSync('node', ['themes.js'], { cwd: root, encoding: 'utf8' });
+  for (const id of themes) assert.ok(out.includes(id + '  ('), id + ' is not listed');
+  assert.match(out, /best for:/);
 });
