@@ -87,7 +87,7 @@ const site = {
   sections: {
     projects: { title: "Featured projects", nav: "Projects" },
     episodes: { title: "Continue watching", small: "Season 1", nav: "Experience" },
-    skills: { title: "Top 10 in my toolkit", small: "Today" },
+    skills: { title: "Top 10 in my toolkit", small: "Today" },   // a "Top N" title is corrected to your real number of skills
     beyond: { title: "Beyond code", small: "Extras" }
   },
   // Order of sections on the page. Ids you leave out follow in the default order.
@@ -236,7 +236,7 @@ const repos = [                              // optional "On GitHub" row. n=name
   { n: "dotfiles", d: "My shell and editor setup.", l: "Shell", c: "#89e051", s: 0, u: "https://github.com/example/dotfiles" }
 ];
 
-const skills = [                             // the "Top 10 in my toolkit" row, 6 to 10 items
+const skills = [                             // the toolkit row: as many as are real (4 to 10 is ideal). Never pad it.
   { n: "Go", s: "Languages", color: "teal" },
   { n: "Python", s: "Languages", color: "blue" },
   { n: "AWS", s: "Cloud", color: "gold" },

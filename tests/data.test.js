@@ -4,13 +4,14 @@ const assert = require('node:assert');
 const { read, loadData, isHttps } = require('./helpers');
 
 const { projects, repos, skills } = loadData();
-const REQUIRED = ['t', 'sub', 'g', 'problem', 'built', 'result', 'stack', 'role', 'blurb', 'tags', 'arch'];
+// Only these are required (same as npm run check). problem, result, stack, role, tags, arch are optional.
+const REQUIRED = ['t', 'sub', 'g', 'built', 'blurb'];
 
 test('every project has the fields the modal reads', () => {
   for (const p of projects) {
     for (const k of REQUIRED) assert.ok(p[k] !== undefined && p[k] !== '', `"${p.t}" is missing "${k}"`);
-    assert.ok(Array.isArray(p.tags) && p.tags.length, `"${p.t}" needs tags`);
-    assert.ok(Array.isArray(p.arch) && p.arch.length, `"${p.t}" needs arch steps`);
+    if (p.tags !== undefined) assert.ok(Array.isArray(p.tags), `"${p.t}" tags must be a list`);
+    if (p.arch !== undefined) assert.ok(Array.isArray(p.arch), `"${p.t}" arch must be a list`);
   }
 });
 

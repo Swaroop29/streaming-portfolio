@@ -74,11 +74,12 @@ function render(d) {
   const aboutHtml = (site.about.paragraphs.length ? '      <div>\n        <div class="eyebrow">' + esc(site.about.eyebrow || '') + '</div>\n        <h3>' + esc(site.about.heading || ('About ' + site.firstName)) + '</h3>\n' +
     site.about.paragraphs.map(p => '        <p>' + esc(p) + '</p>').join('\n') + '\n      </div>\n' : '') + (site.about.facts.length ? '      <dl>\n' +
     site.about.facts.map(f => '        <dt>' + esc(f.label) + '</dt><dd>' + (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">' + esc(f.value) + '</a>' : esc(f.value)) + '</dd>').join('\n') + '\n      </dl>\n' : '') +
-    (education.length ? '      <div class="edu" id="edu">\n        <h4>Education <small>Tap a stop to open it</small></h4>\n        <ol class="tl">\n' +
-      education.map(e => '          <li class="stop" tabindex="0" role="button" aria-expanded="false"><div class="when">' + esc(e.level) + '</div><h5>' + esc(e.title) + ' <i class="chev" aria-hidden="true"></i></h5><div class="where">' +
+    (education.length ? '      <div class="edu" id="edu">\n        <h4>Education' + (education.some(e => (e.details || []).length) ? ' <small>Tap a stop to open it</small>' : '') + '</h4>\n        <ol class="tl">\n' +
+      education.map(e => { const more = (e.details || []).length > 0; // only stops with something to show get a dropdown arrow
+        return '          <li class="stop' + (more ? ' has-more' : '') + '"' + (more ? ' tabindex="0" role="button" aria-expanded="false"' : '') + '><div class="when">' + esc(e.level) + '</div><h5>' + esc(e.title) + (more ? ' <i class="chev" aria-hidden="true"></i>' : '') + '</h5><div class="where">' +
         esc([e.school, e.period, e.extra].filter(Boolean).join(' · ')) + '</div>' +
         ((e.chips || []).length ? '<div class="chips">' + e.chips.map(c => '<span>' + esc(c) + '</span>').join('') + '</div>' : '') +
-        ((e.details || []).length ? '\n            <div class="more"><div class="more-in">' + e.details.map(d => '<p><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</p>').join('') + '</div></div>' : '') + '</li>').join('\n') +
+        (more ? '\n            <div class="more"><div class="more-in">' + e.details.map(d => '<p><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</p>').join('') + '</div></div>' : '') + '</li>'; }).join('\n') +
       '\n        </ol>\n      </div>' : '');
 
   // ---------- contact and footer ----------
@@ -111,12 +112,15 @@ function render(d) {
     projects: { title: 'Featured projects', small: '[' + projects.length + ' titles]', nav: 'Projects', tab: 'Work', has: projects.length > 0 },
     github: { title: 'On GitHub', small: site.githubUser || '', nav: 'GitHub', tab: 'GitHub', has: repos.length > 0 },
     episodes: { title: 'Continue watching', small: 'Season 1', nav: 'Experience', tab: 'Experience', has: experience.length > 0 },
-    skills: { title: 'Top 10 in my toolkit', small: 'Today', nav: 'Skills', tab: 'Skills', has: skills.length > 0 },
+    skills: { title: skills.length >= 3 ? 'Top ' + skills.length + ' in my toolkit' : 'In my toolkit', small: 'Today', nav: 'Skills', tab: 'Skills', has: skills.length > 0 },
     beyond: { title: 'Beyond code', small: 'Extras', nav: 'Beyond', tab: 'Beyond', has: beyond.length > 0 },
     about: { title: 'Cast & crew', small: 'More info', nav: 'About', tab: 'About', has: aboutHtml.trim().length > 0 }
   };
+  // A "Top N" title always matches the real number of skills, so a short list is never labelled "Top 10".
+  const fixTop = (t, n) => t.replace(/^Top\s*\d+\s*/i, n >= 3 ? 'Top ' + n + ' ' : '').replace(/^[a-z]/, ch => ch.toUpperCase());
   extraSections.forEach(x => { SEC[x.id] = { title: x.title, small: x.small || '', nav: x.nav || x.title, tab: x.nav || x.title, has: (x.items || []).length > 0, custom: x }; });
   Object.keys(site.sections || {}).forEach(id => { if (SEC[id]) Object.assign(SEC[id], site.sections[id]); });
+  SEC.skills.title = fixTop(SEC.skills.title, skills.length);
   const ORDER = (site.sectionOrder || []).filter(id => SEC[id]).concat(DEFAULT_ORDER.concat(extraSections.map(x => x.id)).filter(id => !(site.sectionOrder || []).includes(id)));
   const present = ORDER.filter(id => SEC[id].has);
 

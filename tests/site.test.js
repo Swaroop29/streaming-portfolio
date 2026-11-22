@@ -32,7 +32,9 @@ test('analytics.js, when enabled, loads after the page script', () => {
 
 test('every id the script looks up exists in the page', () => {
   const ids = [...read('script.js').matchAll(/getElementById\('([^']+)'\)/g)].map((m) => m[1]);
-  const missing = [...new Set(ids)].filter((id) => !new RegExp(`id="${id}"`).test(html));
+  const { projects, repos, skills } = require('./helpers').loadData();
+  const optional = { 't-projects': projects, 't-repos': repos, 't-skills': skills }; // removed from the page when the list is empty
+  const missing = [...new Set(ids)].filter((id) => !new RegExp(`id="${id}"`).test(html) && !(optional[id] && !optional[id].length));
   assert.deepStrictEqual(missing, []);
 });
 

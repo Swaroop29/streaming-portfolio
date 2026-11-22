@@ -9,9 +9,11 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 const { read, root } = require('./helpers');
 
 const MINIMAL = 'tests/fixtures/minimal-profile.js';
+// Two tests below only make sense while profile.js is still the template's sample. Once a real person fills it in they are skipped.
+const IS_SAMPLE = /Alex Rivera/.test(read('profile.js'));
 const run = (args) => spawnSync('node', ['check.js', ...args], { cwd: root, encoding: 'utf8' });
 
-test('the checker flags leftover sample data in the shipped profile', () => {
+test('the checker flags leftover sample data in the shipped profile', { skip: !IS_SAMPLE && 'profile.js is no longer the sample' }, () => {
   const r = run([]);
   assert.strictEqual(r.status, 1, 'the sample profile must not pass the check');
   assert.match(r.stdout, /Sample data is still present/);
@@ -68,7 +70,7 @@ test('a minimal profile builds a working page with the optional sections removed
   assert.strictEqual(w.document.getElementById('t-skills').children.length, m.skills.length);
 });
 
-test('no personal data from the original author is left anywhere in the repo', () => {
+test('no personal data from the original author is left anywhere in the repo', { skip: !IS_SAMPLE && 'profile.js is no longer the sample' }, () => {
   const skip = new Set(['node_modules', '.git', 'test-results', 'playwright-report', 'package-lock.json', 'jingle.mp3']);
   const hits = [];
   (function walk(dir) {

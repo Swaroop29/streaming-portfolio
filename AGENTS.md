@@ -52,11 +52,55 @@ Examples of what to produce:
 - *Nurse or clinician:* episodes (placements), extra sections "Certifications" and "Specialist training", about. No projects.
 - *New graduate:* projects (coursework, thesis, internships), skills, education in about, short experience. No GitHub row if they have no real repositories.
 
-## Fetching the data
+## Ask once before you build (a resume is never the whole story)
 
-- Use what the person attached or pasted. If you can browse and they gave you a public GitHub username, you may read their public repositories to fill `repos` (name, description, language, stars, URL from the actual repo pages). Use real values only, and skip forks or empty repositories.
-- Do not scrape a private profile, and do not guess content from a name alone.
-- If the person pasted a LinkedIn profile, use its job titles and dates exactly as written.
+A resume is trimmed to one page, so it leaves out most of what makes a portfolio good. After reading it, and before you write `profile.js`, send **one short message** asking only for what is missing. Offer these and let them skip any:
+
+1. Anything real that the resume left out: an earlier internship or job, a side project, a hackathon, a talk, an article or video. (Their own live site or LinkedIn often has these.)
+2. For their top 2 or 3 projects: the problem it solved, and one thing they would do differently. These make the project popup worth opening.
+3. Interests and hobbies, if they want a "Beyond work" section.
+4. Other links to show: LinkedIn, GitHub, blog, LeetCode, Instagram, YouTube, a hosted resume PDF.
+5. Whether to show a phone number, and whether to mention work authorisation or visa status (off by default).
+
+If they are not around to answer, build from the resume and the links, say what you left out, and ask again at the end. Never fill the gaps with guesses.
+
+## Fetching the data (do this, do not skip it)
+
+A resume is a starting point. **Collect every link and profile the person has, open each one, and use what is there.** Say at the start which file you read ("I used `Resume.pdf`, dated 18 Nov 2026") so they can correct you if it is the wrong version.
+
+### 1. Collect the links
+Read the pasted text, and for a PDF also read its hyperlinks (annotations), because words like "demo", "code" and "paper" hide the real addresses. For example: `python3 -c "import pypdf,sys; r=pypdf.PdfReader(sys.argv[1]); [print(a.get_object()['/A']['/URI']) for p in r.pages for a in (p.get('/Annots') or []) if '/A' in a.get_object() and '/URI' in a.get_object()['/A']]" resume.pdf`. Also take links the person pasted in chat.
+
+### 2. Open every link, by type
+- **LinkedIn (their own profile).** It holds more than the resume: every job, internships left off the resume, projects, skills, honors, publications, certifications and courses. Read it if you have a browser tool and the person's browser is signed in: open each page, **wait about 3 seconds for it to load**, then read the text.
+  `/in/<name>/details/experience/`, `/details/education/`, `/details/projects/`, `/details/skills/`, `/details/honors/`, `/details/publications/`, `/details/certifications/`, `/details/courses/`, `/details/volunteering/`, `/details/languages/`.
+  Read only. Never message, connect, post, edit or sign in for them. If it asks for a login or you have no browser, ask the person to paste the sections or export their profile, and carry on.
+- **GitHub profile:** list their public repositories, for example `https://api.github.com/users/<name>/repos?per_page=100&sort=pushed` (or the repo pages). Keep real, non-fork repositories that have content. Fill `repos` with the real name, description, language, stars and URL. Language colours: JavaScript `#f1e05a`, Python `#3572A5`, Java `#b07219`, TypeScript `#3178c6`, Go `#00ADD8`, C++ `#f34b7d`, PHP `#4F5D95`, HTML `#e34c26`, CSS `#563d7c`, Shell `#89e051`. If a repository has no description, read its README and write one plain sentence from it, or skip that repository.
+- **YouTube channel, videos, talks, podcasts, demos, screen recordings:** open the channel or video. Take the real title, what it covers and the date. Add each worthwhile one: as a project's `extra` link (`{ l: "Watch the demo", u: "..." }`), or as items in an `extraSections` section such as "Videos and talks" (`title`, `text`, `meta` = year, `tag` = "Talk", `link`). For a video-editor, filmmaker or creator, the channel or reel is the main content: build the page around it (a "Work" section with one card per video or edit, `labels` such as `stack: "Tools"`, `arch: "Process"`, `result: "Views or outcome"` only if real).
+- **Articles and blogs** (DEV, Medium, Substack, their own site): open them; add each as a `blog` link on the matching project, or as `extraSections` items "Writing", and mention it in `site.about.facts` (use its `url`).
+- **Papers and DOIs** (Zenodo, arXiv, Google Scholar, ORCID): open them for the exact title, year and co-authors. Add as `blog`/`extra` links or "Publications" items.
+- **Live demos, apps, sites, Behance, Dribbble, Figma, portfolios, app-store pages:** open them. Use them to confirm names and dates and to fill project fields (`problem`, `built`, `result`, `stack`, `live`, `src`, `blog`).
+- **LeetCode, Kaggle, Instagram, X, Chess.com, Stack Overflow, Medium profile and similar:** add them as `contact.links` buttons (label = the site name) when the person gave the link. Do not guess handles.
+- **Anything else:** open it and decide what it is. A link you cannot classify still gets mentioned to the person.
+
+### 3. Go one level deeper
+A README, a DOI page, a blog post or a channel "About" page often links to the demo, a video, a write-up or a second paper. Follow those once, and add what they give you. Stop there; do not crawl the whole web.
+
+### 4. When sources disagree, do not pick silently
+Resume, LinkedIn and GitHub often disagree (an end date, a title, "winner" versus "presented"). Use the value the person confirms. If you cannot ask, use the **more cautious** one (the shorter span, the lower claim) and list every conflict in your final message so they can fix the source.
+
+### 5. If a link will not open
+Say so in your final message and carry on. Do not guess what was behind it. Do not scrape private pages or get around a sign-in. If the person gave only a GitHub username or portfolio link and no resume, start from those, and use only what you read.
+
+## The hero numbers and work experience
+
+If the person has paid work, **the first of the three `heroStats` is how long they have worked**, worked out from the dates in `experience`: for example `{ value: "9 mo", label: "SDE at Amazon" }` or `{ value: "4 yrs", label: "In industry" }`. Rules: use the exact span, never round up, and if you add an internship to a job say so in the label ("incl. internship"). Also put the employer or role in the badges. Fill the other two stats and the `recap` box with other true numbers from their material. A student or career changer with no paid work uses honest alternatives (projects shipped, years of study) instead. Never invent a number.
+
+## Keep rows and cards flexible
+
+- **Skills:** show what is real, 4 or more. Do not pad the row to reach a number. A title that says "Top N" is corrected automatically to the real count. With fewer than 4 skills, set `skills: []` and let the row disappear.
+- **Education `details`:** fill them from the person's own facts whenever the dates line up, for example a degree whose years match a thesis, a final-year project, a poster or a hackathon win (`{ label: "Built", text: "..." }`, `{ label: "Result", text: "..." }`). Leave `details: []` only when there is genuinely nothing real to add. A stop with no details gets no dropdown arrow.
+- Any list that is empty removes its section. Do not add placeholder text to fill a card.
 
 ## Steps
 
@@ -65,6 +109,7 @@ Examples of what to produce:
    - `experience`: newest first. 1 to 5 "episodes" (achievements) per company. `title`, `blurb`, `label`, `color`, `tag` are required. `situation`, `did` and `stack` are optional.
    - `projects`: 3 to 7 is ideal. Required: `t`, `color`, `sub`, `built`, `blurb`. The rest (`problem`, `result`, `stack`, `role`, `arch`, `diff`, `live`, `src`, `blog`) are optional.
    - `color` values: red, blue, green, purple, gold, pink, lime, teal, indigo, orange, dark.
+   - `heroStats`: first stat is time at work (see "The hero numbers"). `repos`: from their GitHub link (see "Fetching the data").
    - `site.url` is the address where it will be hosted, for example `https://name.pages.dev`. If unknown, ask.
 3. Run `npm install`, then:
    - `npm run build` to generate `index.html`, `llms.txt`, `robots.txt` and `sitemap.xml`
@@ -72,6 +117,20 @@ Examples of what to produce:
    - `npm test` to run the tests. All must pass.
    - Optional: `npm run og` (needs Chromium) to regenerate the share image `assets/og-image.png`.
 4. Tell the person plainly: which sections you included and why, which you left out because they had no material, what you left blank, and anything you were unsure about, so they can confirm facts before publishing.
+
+## Final checklist (run it before you hand over)
+
+- [ ] I said which resume file I used and its date.
+- [ ] I opened every link in the resume and every link the person gave me, including LinkedIn, GitHub, YouTube, articles, papers and demos, and followed the useful ones one level deeper.
+- [ ] I asked the one short question about what is missing, or said what I left out.
+- [ ] Jobs, internships, projects, awards and publications from LinkedIn and GitHub that the resume omits are included when the person's own pages show them.
+- [ ] Every date, title and award matches between sources, or the conflict is listed for the person.
+- [ ] The first hero stat is how long they have worked, from exact dates, never rounded up.
+- [ ] Sections with nothing real are empty (so they disappear). No placeholder text, no padded skill row, no education dropdown without details.
+- [ ] Education details are filled from real facts whose dates line up (thesis, final-year project, poster, hackathon, society).
+- [ ] Phone numbers and visa or work-authorisation text only appear if the person asked.
+- [ ] `npm run build`, `npm run check` and `npm test` pass, and I read every warning.
+- [ ] My final message lists: the sections included and left out, what I left blank, every conflict between sources, and links that would not open.
 
 ## Publishing (ask the person, then guide or do it)
 

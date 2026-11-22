@@ -75,3 +75,36 @@ test('the checker rejects a theme that does not exist', () => {
   assert.strictEqual(r.status, 1);
   assert.match(r.stdout, /site\.theme "nope" does not exist\. Available themes: netflix/);
 });
+
+// Flexible rows: the toolkit title follows the real count, and an education stop only gets a dropdown when it has details.
+function buildVariant(mutate) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'variant-'));
+  const prof = path.join(dir, 'profile.js');
+  fs.writeFileSync(prof, `const p = require(${JSON.stringify(path.join(root, 'tests/fixtures/minimal-profile.js'))});\n(${mutate.toString()})(p);\nmodule.exports = p;`);
+  build('netflix', prof, dir);
+  return fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
+}
+
+test('the toolkit title matches how many skills there really are', () => {
+  const six = buildVariant((p) => { p.site.sections = { skills: { title: 'Top 10 in my toolkit' } }; });
+  assert.match(six, /<h2>Top 6 in my toolkit/);
+  assert.doesNotMatch(six, /Top 10/);
+  const two = buildVariant((p) => { p.skills = p.skills.slice(0, 2); p.site.sections = { skills: { title: 'Top 10 in my toolkit' } }; });
+  assert.match(two, /<h2>In my toolkit/);
+  assert.doesNotMatch(two, /Top \d+ in my toolkit/);
+});
+
+test('an education stop has a dropdown only when it has details', () => {
+  const html = buildVariant((p) => {
+    p.education = [
+      { level: 'Postgraduate', title: 'MSc One', school: 'Uni A', period: '2023 to 2024', extra: '', chips: [], details: [] },
+      { level: 'Undergraduate', title: 'BSc Two', school: 'Uni B', period: '2019 to 2023', extra: '', chips: [], details: [{ label: 'Built', text: 'a thesis.' }] }
+    ];
+  });
+  assert.strictEqual((html.match(/<h5>[^<]*<i class="chev"/g) || []).length, 1, 'only the stop with details gets an arrow');
+  assert.strictEqual((html.match(/class="stop has-more"/g) || []).length, 1);
+  assert.match(html, /Tap a stop to open it/);
+  const none = buildVariant((p) => { p.education = [{ level: 'Undergraduate', title: 'BSc', school: 'Uni', period: '2020', extra: '', chips: [], details: [] }]; });
+  assert.doesNotMatch(none, /<h5>[^<]*<i class="chev"/);
+  assert.doesNotMatch(none, /Tap a stop to open it/);
+});

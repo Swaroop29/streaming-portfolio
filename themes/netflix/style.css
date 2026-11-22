@@ -277,10 +277,11 @@ footer { padding: 22px 0 40px; color: #71717a; font-size: 13px; display: flex; j
 .tl .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .tl .chips span { font-size: 13px; padding: 4px 11px; border-radius: 999px; background: var(--panel-2); border: 1px solid #ffffff1a; }
 .edu h4 small { font-family: var(--body); font-size: 13px; letter-spacing: 0; color: var(--muted); margin-left: 10px; font-weight: 400; }
-.tl .stop { cursor: pointer; border-radius: 8px; outline-offset: 6px; }
-.tl .stop:hover h5, .tl .stop:focus-visible h5 { color: var(--accent); }
+.tl .stop { cursor: default; border-radius: 8px; outline-offset: 6px; }
+.tl .stop.has-more { cursor: pointer; }
+.tl .stop.has-more:hover h5, .tl .stop:focus-visible h5 { color: var(--accent); }
 .tl .stop::before { transition: transform .3s, background .3s; }
-.tl .stop:hover::before, .tl .stop.open::before { transform: scale(1.25); background: var(--accent); }
+.tl .stop.has-more:hover::before, .tl .stop.open::before { transform: scale(1.25); background: var(--accent); }
 .tl .stop h5 { display: flex; align-items: center; gap: 10px; transition: color .2s; }
 .tl .chev { width: 9px; height: 9px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .3s; opacity: .7; margin-top: -3px; }
 .tl .stop.open .chev { transform: rotate(-135deg); margin-top: 3px; }

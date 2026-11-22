@@ -108,8 +108,9 @@ const titles = new Set();
   if (typeof r.s !== 'number') err('repos[' + i + '].s (stars) must be a number.');
   if (r.u && !/^https:\/\/github\.com\//.test(r.u)) err('repos[' + i + '].u must be a github.com link.');
 });
-if (skills.length && skills.length < 4) warn('Only ' + skills.length + ' skills. 6 to 10 looks best, or leave it empty to hide the row.');
-if (skills.length > 10) warn('skills has ' + skills.length + ' items; the row is titled "Top 10", so keep 10 or fewer.');
+if ((experience || []).length && !(site.heroStats || []).length) warn('They have work experience but heroStats is empty. Make the first stat how long they have worked (AGENTS.md).');
+if (skills.length && skills.length < 4) warn('Only ' + skills.length + ' skills. A row of 4 to 10 looks best, or leave it empty to hide it. Never pad it to reach a number.');
+if (skills.length > 15) warn('skills has ' + skills.length + ' items. Keep the strongest 10 to 15; a long row is hard to scan.');
 (skills || []).forEach((s, i) => { need(s, ['n', 's', 'color'], 'skills[' + i + ']'); if (s.color && !PALETTE[s.color]) err('skills[' + i + '].color "' + s.color + '" is not a known colour.'); });
 
 // 7b. Custom sections, order and titles
@@ -153,6 +154,6 @@ async function links() {
   for (const w of warnings) console.log('warning: ' + w);
   for (const e of errors) console.log('ERROR:   ' + e);
   console.log('\n' + errors.length + ' error(s), ' + warnings.length + ' warning(s)' + (online ? '' : '. Add --links to also test that every link opens.'));
-  if (!errors.length) console.log('Profile looks complete.');
+  if (!errors.length) console.log('Profile looks complete.\nBefore you hand over, run the "Final checklist" in AGENTS.md (sources opened, conflicts listed, nothing invented).');
   process.exit(errors.length ? 1 : 0);
 })();

@@ -40,7 +40,7 @@ test('page scripts run with no errors', () => {
 test('one card is rendered per project, repo and skill', () => {
   const { w } = boot();
   const d = loadData();
-  const n = (id) => w.document.getElementById(id).children.length;
+  const n = (id) => { const e = w.document.getElementById(id); return e ? e.children.length : 0; }; // a section with no items is removed from the page
   assert.strictEqual(n('t-projects'), d.projects.length, 'project cards');
   assert.strictEqual(n('t-repos'), d.repos.length, 'repo cards');
   assert.strictEqual(n('t-skills'), d.skills.length, 'skill cards');
