@@ -12,7 +12,8 @@
     "e2e": "playwright test",
     "test:all": "npm test && playwright test",
     "package": "node package.js",
-    "single": "node package.js --single"
+    "single": "node package.js --single",
+    "themes": "node themes.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

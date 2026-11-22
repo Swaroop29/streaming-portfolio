@@ -102,6 +102,15 @@ If the person has paid work, **the first of the three `heroStats` is how long th
 - **Education `details`:** fill them from the person's own facts whenever the dates line up, for example a degree whose years match a thesis, a final-year project, a poster or a hackathon win (`{ label: "Built", text: "..." }`, `{ label: "Result", text: "..." }`). Leave `details: []` only when there is genuinely nothing real to add. A stop with no details gets no dropdown arrow.
 - Any list that is empty removes its section. Do not add placeholder text to fill a card.
 
+## Choose the design (a theme)
+
+Run `npm run themes` to list the designs in `themes/` with their mood and who they suit. Pick with the person, not for them:
+
+1. Ask in one line what role they have and what feel they want ("bold and playful", "calm and serious", and so on).
+2. Recommend the one or two themes whose `bestFor` and `mood` fit, and say why in a sentence.
+3. If they want to compare, build each candidate (set `site.theme`, run `npm run build`) and show them the page, then keep their choice in `site.theme`.
+4. If they have no preference, use `netflix` for engineers, designers and product people, and `editorial` for researchers, writers, lawyers, consultants and teachers. Every theme shows the same content, so switching later costs nothing.
+
 ## Steps
 
 1. Read `profile.js` fully. It is commented and shows every field and option with sample data.
@@ -122,6 +131,7 @@ If the person has paid work, **the first of the three `heroStats` is how long th
 
 - [ ] I said which resume file I used and its date.
 - [ ] I opened every link in the resume and every link the person gave me, including LinkedIn, GitHub, YouTube, articles, papers and demos, and followed the useful ones one level deeper.
+- [ ] I chose the design with the person (`npm run themes`) and set `site.theme`.
 - [ ] I asked the one short question about what is missing, or said what I left out.
 - [ ] Jobs, internships, projects, awards and publications from LinkedIn and GitHub that the resume omits are included when the person's own pages show them.
 - [ ] Every date, title and award matches between sources, or the conflict is listed for the person.
