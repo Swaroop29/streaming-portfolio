@@ -41,7 +41,7 @@ npx playwright test e2e/themes.spec.js   # phones, tablets, laptops: no errors, 
 Look at it yourself on a narrow and a wide screen before you hand it over. Then set `site.theme: "<new-id>"` in the person's `profile.js`.
 
 ## 6. Styles worth building
-Built so far: `netflix`, `editorial`, `shelves`. The tests make it safe to add any of these, and each can be built in one sitting:
+Built so far: `netflix`, `editorial`, `shelves`, `desktop`, `neon-coast`. The tests make it safe to add any of these, and each can be built in one sitting:
 
 | id | Idea | Best for |
 |---|---|---|
@@ -56,3 +56,7 @@ Built so far: `netflix`, `editorial`, `shelves`. The tests make it safe to add a
 | `storefront` | App-store style cards with a screenshot, a one-line promise and a button | product people, mobile developers |
 
 Whatever the look, a fancy interface needs a plain fallback: the same content as a simple readable list, so crawlers, screen readers and people in a hurry still get everything.
+
+## Pictures that match the content
+
+A theme that shows pictures should draw them from the person's own content, not from a fixed set. `neon-coast` picks a scene for each project from its own words (billing gets a ledger, a dashboard gets charts, an AI project gets a network, and so on) and falls back to a laptop scene. If you can generate or find a real picture, save it in `assets/` and set `image: "assets/name.jpg"` on the project; the theme then uses it instead. Never reuse another person's pictures.
