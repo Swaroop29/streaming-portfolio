@@ -2,8 +2,32 @@
   "id": "neon-coast",
   "name": "Neon Coast",
   "description": "A big game-launch page for your career: a sunset hero where your name assembles from slices over a layered skyline, a tiled cover-art collage for projects, a story block, and bold chapter bands for everything else. Pink, orange and teal on deep purple. Not affiliated with any game or studio.",
-  "mood": ["cinematic", "bold", "retro", "high-energy"],
-  "bestFor": ["game developers", "designers and creatives", "video editors and musicians", "engineers who want a launch-trailer feel"],
-  "features": ["sunset hero with layered skyline", "name that assembles from slices", "cover-art project collage", "project dialogs", "mouse and scroll parallax", "story block", "custom sections", "works without JavaScript", "prints in black on white"],
-  "files": ["style.css", "script.js"]
+  "mood": [
+    "cinematic",
+    "bold",
+    "retro",
+    "high-energy"
+  ],
+  "bestFor": [
+    "game developers",
+    "designers and creatives",
+    "video editors and musicians",
+    "engineers who want a launch-trailer feel"
+  ],
+  "features": [
+    "sunset hero with layered skyline",
+    "name that assembles from slices",
+    "cover-art project collage",
+    "project dialogs",
+    "mouse and scroll parallax",
+    "story block",
+    "custom sections",
+    "works without JavaScript",
+    "prints in black on white"
+  ],
+  "files": [
+    "style.css",
+    "script.js"
+  ],
+  "images": "recommended"
 }

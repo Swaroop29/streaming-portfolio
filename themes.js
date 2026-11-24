@@ -6,6 +6,7 @@ for (const id of fs.readdirSync(dir).sort()) {
   const f = path.join(dir, id, 'theme.json');
   if (!fs.existsSync(f)) continue;
   const m = JSON.parse(fs.readFileSync(f, 'utf8'));
-  console.log(`${m.id}  (${m.name})\n  ${m.description}\n  mood: ${m.mood.join(', ')}\n  best for: ${m.bestFor.join(', ')}\n`);
+  const pics = m.images === 'recommended' ? '  pictures: looks best with generated images. Needs an AI image generator (see AGENTS.md), or the drawn fallback is used.\n' : '';
+  console.log(`${m.id}  (${m.name})\n  ${m.description}\n  mood: ${m.mood.join(', ')}\n  best for: ${m.bestFor.join(', ')}\n${pics}`);
 }
 console.log('Choose one by setting  site.theme  in profile.js, then run npm run build.');

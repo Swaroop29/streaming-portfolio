@@ -60,3 +60,5 @@ Whatever the look, a fancy interface needs a plain fallback: the same content as
 ## Pictures that match the content
 
 A theme that shows pictures should draw them from the person's own content, not from a fixed set. `neon-coast` picks a scene for each project from its own words (billing gets a ledger, a dashboard gets charts, an AI project gets a network, and so on) and falls back to a laptop scene. If you can generate or find a real picture, save it in `assets/` and set `image: "assets/name.jpg"` on the project; the theme then uses it instead. Never reuse another person's pictures.
+
+A design that depends on pictures must say so in `theme.json` (`"images": "recommended"`), take them from optional `site.heroImage` and project `image` fields, and ship a drawn fallback so the page is never broken. `npm run themes` and `npm run check` then tell the AI to generate the pictures (AGENTS.md).

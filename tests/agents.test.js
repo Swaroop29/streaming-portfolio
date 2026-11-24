@@ -38,3 +38,22 @@ test('the recipe for building a new theme exists and AGENTS.md points to it', ()
   assert.match(md, /does not exist/);
   assert.match(md, /THEMES\.md/);
 });
+
+test('AGENTS.md tells the AI how to get pictures for the Neon Coast design', () => {
+  const a = require('fs').readFileSync(require('path').join(__dirname, '..', 'AGENTS.md'), 'utf8');
+  assert.match(a, /image-prompts/);
+  assert.match(a, /heroImage/);
+});
+
+test('image-led designs are declared and the AI is told what to do with and without an image generator', () => {
+  const fs = require('fs'), path = require('path');
+  const a = fs.readFileSync(path.join(__dirname, '..', 'AGENTS.md'), 'utf8');
+  assert.match(a, /## Pictures for image-led designs/);
+  assert.match(a, /If you can:/);
+  assert.match(a, /If you cannot:/);
+  assert.match(a, /Never present the drawn fallback as the finished look/);
+  const man = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'themes', 'neon-coast', 'theme.json'), 'utf8'));
+  assert.strictEqual(man.images, 'recommended');
+  const out = require('child_process').execFileSync('node', ['themes.js'], { cwd: path.join(__dirname, '..') }).toString();
+  assert.match(out, /looks best with generated images/);
+});

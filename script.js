@@ -92,14 +92,14 @@ document.addEventListener('click', e => {
 
 /* education stops */
 (function () {
-  const stops = document.querySelectorAll('.tl .stop');
+  const stops = document.querySelectorAll('.tl .stop.has-more');
   const tog = el => { const o = !el.classList.contains('open'); el.classList.toggle('open', o); el.setAttribute('aria-expanded', o); };
   stops.forEach(el => {
     el.addEventListener('click', () => tog(el));
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(el); } });
   });
   const e = document.getElementById('edu');
-  if (e) new MutationObserver(() => { if (e.classList.contains('go') && !e.dataset.peek) { e.dataset.peek = 1; setTimeout(() => { if (stops[1] && !document.querySelector('.tl .stop.open')) tog(stops[1]); }, 2600); } }).observe(e, { attributes: true, attributeFilter: ['class'] });
+  if (e) new MutationObserver(() => { if (e.classList.contains('go') && !e.dataset.peek) { e.dataset.peek = 1; setTimeout(() => { if (stops[0] && !document.querySelector('.tl .stop.open')) tog(stops[stops.length > 1 ? 1 : 0]); }, 2600); } }).observe(e, { attributes: true, attributeFilter: ['class'] });
 })();
 
 /* copy buttons */

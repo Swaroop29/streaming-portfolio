@@ -108,6 +108,11 @@ const titles = new Set();
   if (typeof r.s !== 'number') err('repos[' + i + '].s (stars) must be a number.');
   if (r.u && !/^https:\/\/github\.com\//.test(r.u)) err('repos[' + i + '].u must be a github.com link.');
 });
+// Image-led designs look best with real pictures (AGENTS.md, "Pictures for image-led designs").
+try {
+  const man = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'themes', site.theme || 'netflix', 'theme.json'), 'utf8'));
+  if (man.images === 'recommended' && !site.heroImage) warn('The "' + man.id + '" design looks best with real pictures and none are set. Run npm run image-prompts, generate the images (or ask the person to), save them in assets/ and set site.heroImage and each project image. If you cannot generate images, tell the person plainly that the drawn fallback is being used.');
+} catch (e) { /* unknown theme is reported elsewhere */ }
 if ((experience || []).length && !(site.heroStats || []).length) warn('They have work experience but heroStats is empty. Make the first stat how long they have worked (AGENTS.md).');
 if (skills.length && skills.length < 4) warn('Only ' + skills.length + ' skills. A row of 4 to 10 looks best, or leave it empty to hide it. Never pad it to reach a number.');
 if (skills.length > 15) warn('skills has ' + skills.length + ' items. Keep the strongest 10 to 15; a long row is hard to scan.');

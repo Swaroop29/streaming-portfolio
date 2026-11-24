@@ -64,20 +64,29 @@ function heroScene() {
 // Each project gets a picture that matches what it is about, chosen from its own words.
 const MOTIFS = [
   ['ai', /\b(ai|ml|llm|gpt|agent|agents|neural|nlp|mcp|machine learning|knowledge graph|graph|embedding|rag|model|models|inference)\b/gi],
-  ['money', /\b(bill|billing|invoice|invoices|pay|payment|payments|fintech|lend|loan|loans|bank|banking|finance|financial|trade|trading|stock|ledger|commerce|checkout|price|pricing|deal|deals|audit)\b/gi],
+  ['money', /\b(bill|billing|invoice|invoices|pay|payment|payments|fintech|lend|lending|lender|credit|loan|loans|bank|banking|finance|financial|trade|trading|stock|ledger|commerce|checkout|price|pricing|deal|deals|audit)\b/gi],
   ['data', /\b(dashboard|dashboards|analytics|analysis|analyse|data|metric|metrics|report|reporting|bi|visuali[sz]ation|chart|charts|d3|insight|insights|monitoring)\b/gi],
   ['security', /\b(security|secure|auth|oauth|encrypt|encryption|cyber|privacy|vulnerability|incident|tls|certificate|compliance|fraud)\b/gi],
   ['map', /\b(geo|map|maps|gis|location|route|routes|travel|logistics|cartopy|geopandas|city|navigation)\b/gi],
   ['energy', /\b(energy|hydrogen|green|solar|wind|climate|sustainable|sustainability|power|environment|carbon|battery|grid)\b/gi],
   ['game', /\b(game|games|gaming|unity|unreal|3d|vr|ar|pixel|arcade|graphics|engine)\b/gi],
   ['research', /\b(research|paper|papers|thesis|study|science|scientific|msc|phd|lab|experiment|bio|health|medical|clinical|survey|literature)\b/gi],
+  ['law', /\b(law|legal|court|contract|contracts|litigation|attorney|lawyer|counsel|solicitor|barrister|case|cases|judgment|tribunal|regulation|regulatory)\b/gi],
+  ['health', /\b(patient|patients|clinic|clinical|nurse|nursing|doctor|therapy|therapist|hospital|care|wellbeing|treatment|pharmacy|dental)\b/gi],
+  ['teach', /\b(teach|teacher|teaching|school|student|students|curriculum|lesson|lessons|classroom|tutor|education|training|workshop|course|courses)\b/gi],
+  ['design', /\b(design|designer|brand|branding|logo|poster|creative|illustration|illustrator|typography|packaging|visual identity)\b/gi],
+  ['food', /\b(recipe|recipes|restaurant|chef|menu|kitchen|bake|baking|cafe|catering|cooking|food)\b/gi],
+  ['build', /\b(construction|architecture|architect|building|buildings|blueprint|civil|structural|site|surveying|planning|interior)\b/gi],
+  ['market', /\b(marketing|campaign|campaigns|sales|growth|audience|seo|advertising|ads|content|copywriting|pr|customers)\b/gi],
+  ['media', /\b(video|film|edit|editing|music|podcast|audio|camera|photography|photo|youtube|channel|studio|broadcast)\b/gi],
   ['phone', /\b(mobile|ios|android|flutter|swift|kotlin|chat|social|messaging|notification|notifications)\b/gi],
   ['cloud', /\b(aws|azure|gcp|cloud|kubernetes|k8s|docker|infrastructure|infra|devops|terraform|scale|scaling|migration|migrate|deploy|deployment|pipeline|scheduler|distributed|backend|microservice|microservices|api|database|dynamodb|postgres|postgresql|kafka|queue|latency|uptime|region|regions)\b/gi],
   ['web', /\b(web|website|frontend|front-end|react|vue|ui|ux|portfolio|css|html|browser|landing|page)\b/gi]
 ];
-function kindFor(p) {
+const TECH_ROLE = /\b(engineer|developer|programmer|software|devops|sre|data scientist|machine learning|full[- ]?stack|backend|frontend|web)\b/i;
+function kindFor(p, role) {
   const text = [p.t, p.t, p.sub, p.blurb, p.stack, p.badge, p.problem, p.built, p.result].filter(Boolean).join(' ');
-  let best = 'code', top = 0;
+  let best = TECH_ROLE.test(role || 'software engineer') ? 'code' : 'work', top = 0;
   MOTIFS.forEach(([k, re]) => { const n = (text.match(re) || []).length; if (n > top) { top = n; best = k; } });
   return best;
 }
@@ -92,11 +101,43 @@ const FG = {
   map: () => '<path d="M104 44 L168 36 L232 48 L296 38 L296 160 L232 170 L168 158 L104 168Z" fill="#f2e4c8"/><path d="M168 36 V158 M232 48 V170" stroke="#cdb78f" stroke-width="2"/><path d="M118 140 C150 100 190 130 220 90 S270 70 284 60" stroke="#e0407f" stroke-width="4" stroke-dasharray="8 6" fill="none"/><circle cx="118" cy="140" r="6" fill="#4af0e0"/><path d="M284 40 a14 14 0 1 1 0.1 0 L284 78Z" fill="#ff3d5a"/><circle cx="284" cy="54" r="5" fill="#fff3e4"/>',
   game: () => '<rect x="100" y="64" width="200" height="96" rx="44" fill="#2a1a45" stroke="#6a4a9a" stroke-width="3"/><rect x="138" y="94" width="14" height="40" rx="3" fill="#fff3e4"/><rect x="125" y="107" width="40" height="14" rx="3" fill="#fff3e4"/><circle cx="246" cy="98" r="10" fill="#ff6f9c"/><circle cx="270" cy="116" r="10" fill="#4af0e0"/><circle cx="222" cy="116" r="10" fill="#ffd36b"/><circle cx="246" cy="134" r="10" fill="#9a7bff"/><rect x="180" y="104" width="16" height="8" rx="3" fill="#6a4a9a"/><rect x="204" y="104" width="16" height="8" rx="3" fill="#6a4a9a"/>',
   research: () => '<rect x="98" y="150" width="130" height="16" fill="#e0407f"/><rect x="108" y="134" width="116" height="16" fill="#4af0e0"/><rect x="94" y="118" width="124" height="16" fill="#ffd36b"/><rect x="104" y="102" width="108" height="16" fill="#9a7bff"/><path d="M270 44 h28 v36 l32 64 c4 10 -2 20 -14 20 h-64 c-12 0 -18 -10 -14 -20 l32 -64z" fill="#fff3e4" opacity=".9"/><path d="M252 134 h64 l12 24 c3 8 -2 12 -10 12 h-68 c-8 0 -13 -4 -10 -12z" fill="#4af0e0"/><circle cx="276" cy="120" r="4" fill="#fff3e4"/><circle cx="292" cy="108" r="3" fill="#fff3e4"/>',
+  law: () => '<rect x="176" y="40" width="8" height="106" fill="#e9b52e"/><rect x="104" y="48" width="192" height="8" rx="4" fill="#ffd36b"/><path d="M104 56 L82 104 H126Z M296 56 L274 104 H318Z" fill="none" stroke="#ffd36b" stroke-width="3"/><path d="M80 104 H128 a24 12 0 0 1 -48 0Z M272 104 H320 a24 12 0 0 1 -48 0Z" fill="#ffd36b"/><rect x="150" y="146" width="60" height="12" rx="3" fill="#e9b52e"/><g transform="rotate(-28 250 150)"><rect x="230" y="136" width="52" height="22" rx="4" fill="#8a4a2a"/><rect x="254" y="156" width="8" height="40" rx="3" fill="#6a3418"/></g>',
+  health: () => '<rect x="130" y="40" width="140" height="120" rx="14" fill="#fff3e4"/><rect x="190" y="60" width="20" height="80" rx="4" fill="#ff4f6a"/><rect x="160" y="90" width="80" height="20" rx="4" fill="#ff4f6a"/><path d="M92 60 C92 110 120 124 150 124" stroke="#4af0e0" stroke-width="5" fill="none"/><circle cx="92" cy="56" r="7" fill="#4af0e0"/><circle cx="158" cy="126" r="9" fill="#fff3e4" stroke="#4af0e0" stroke-width="4"/>',
+  teach: () => '<rect x="100" y="36" width="200" height="124" rx="8" fill="#1d4a42" stroke="#c9915a" stroke-width="8"/><path d="M122 70 H210 M122 92 H250 M122 114 H180" stroke="#fff3e4" stroke-width="4" stroke-linecap="round" opacity=".85"/><path d="M226 120 l14 -26 l14 26z" fill="none" stroke="#ffd36b" stroke-width="3"/><rect x="108" y="160" width="60" height="9" fill="#e0407f"/><rect x="114" y="151" width="52" height="9" fill="#4af0e0"/><rect x="262" y="164" width="30" height="5" rx="2" fill="#fff3e4"/>',
+  design: () => '<rect x="104" y="44" width="150" height="116" rx="8" fill="#fff3e4"/>' + [['#ff4f87', 124, 64], ['#ffd36b', 164, 64], ['#4af0e0', 204, 64], ['#9a7bff', 124, 104], ['#ff9a3c', 164, 104]].map(c => '<circle cx="' + (c[1] + 16) + '" cy="' + (c[2] + 16) + '" r="17" fill="' + c[0] + '"/>').join('') + '<rect x="204" y="94" width="36" height="42" rx="4" fill="#2a1a45"/><g transform="rotate(35 290 90)"><rect x="276" y="40" width="14" height="96" rx="4" fill="#4af0e0"/><path d="M276 136 h14 l-7 22z" fill="#ffd36b"/></g>',
+  food: () => '<ellipse cx="200" cy="130" rx="86" ry="22" fill="#fff3e4"/><ellipse cx="200" cy="124" rx="62" ry="15" fill="#e8d9c4"/><path d="M150 118 C150 84 250 84 250 118Z" fill="#c9915a"/><circle cx="178" cy="100" r="6" fill="#ff4f6a"/><circle cx="204" cy="94" r="6" fill="#6ac46a"/><circle cx="226" cy="102" r="6" fill="#ffd36b"/><path d="M96 70 q8 -14 0 -28 M112 74 q8 -14 0 -28" stroke="#fff3e4" stroke-width="3" fill="none" opacity=".7"/>',
+  build: () => '<rect x="96" y="44" width="208" height="116" fill="#1c3f7a"/><path d="M96 82 H304 M96 120 H304 M148 44 V160 M236 44 V160" stroke="#8fc2ff" stroke-width="1.5" opacity=".6"/><rect x="164" y="64" width="72" height="64" fill="none" stroke="#fff3e4" stroke-width="3"/><path d="M164 128 V92 L200 64 L236 92 V128" fill="none" stroke="#ffd36b" stroke-width="3"/><path d="M262 150 L292 60 M292 150 L262 60" stroke="#ff9a3c" stroke-width="3"/>',
+  market: () => '<path d="M110 100 L250 50 V150 L110 120Z" fill="#ff6f9c"/><rect x="92" y="96" width="30" height="28" rx="4" fill="#fff3e4"/><path d="M268 64 q22 36 0 72 M284 54 q34 46 0 92" stroke="#4af0e0" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M110 124 L130 170" stroke="#ffd36b" stroke-width="8" stroke-linecap="round"/>',
+  media: () => '<rect x="112" y="64" width="176" height="94" rx="12" fill="#2a2338" stroke="#d9cfc2" stroke-width="4"/><circle cx="200" cy="112" r="34" fill="#12082a" stroke="#d9cfc2" stroke-width="6"/><circle cx="200" cy="112" r="16" fill="#4af0e0"/><rect x="132" y="48" width="44" height="18" rx="4" fill="#d9cfc2"/><circle cx="262" cy="84" r="7" fill="#ff3d5a"/>',
+  work: () => '<rect x="112" y="80" width="176" height="84" rx="10" fill="#8a4a2a"/><rect x="112" y="108" width="176" height="6" fill="#5a2c14"/><rect x="186" y="104" width="28" height="18" rx="4" fill="#ffd36b"/><path d="M164 80 v-14 a12 12 0 0 1 12 -12 h48 a12 12 0 0 1 12 12 v14" fill="none" stroke="#8a4a2a" stroke-width="8"/><rect x="132" y="46" width="70" height="40" rx="3" fill="#fff3e4" transform="rotate(-8 167 66)"/><rect x="208" y="42" width="70" height="44" rx="3" fill="#f2e4c8" transform="rotate(6 243 64)"/>',
   code: () => '<rect x="112" y="46" width="176" height="104" rx="8" fill="#2a2338" stroke="#d9cfc2" stroke-width="5"/><rect x="122" y="56" width="156" height="84" fill="#0c2a30"/>' + [[130, 70, 50, '#ff6f9c'], [186, 70, 36, '#4af0e0'], [138, 84, 70, '#ffd36b'], [214, 84, 40, '#9a7bff'], [138, 98, 36, '#4af0e0'], [180, 98, 60, '#ff6f9c'], [130, 112, 80, '#ffd36b'], [138, 126, 44, '#4af0e0']].map(l => '<rect x="' + l[0] + '" y="' + l[1] + '" width="' + l[2] + '" height="6" rx="3" fill="' + l[3] + '"/>').join('') + '<path d="M96 150 H304 L318 166 H82Z" fill="#cfc4b6"/><rect x="180" y="156" width="40" height="4" rx="2" fill="#a89c8c"/>'
 };
+const MOTIF_TEXT = {
+  ai: 'a glowing retro CRT monitor showing a web of connected nodes, a desk by a window',
+  money: 'stacks of gold coins and a paper invoice on a cafe table, a cash register',
+  data: 'a retro monitor showing bright bar charts and a rising line graph, analyst desk',
+  security: 'a glowing shield with a padlock, neon vault door',
+  map: 'a folded paper map with a dashed route and a red pin on a car dashboard',
+  energy: 'wind turbines on a green coastal cliff above the sea',
+  game: 'an arcade cabinet and a game controller, neon arcade',
+  research: 'stacked books, a glowing lab flask and notes on a desk',
+  phone: 'a smartphone with chat bubbles on a table by the sea',
+  cloud: 'rows of server racks with blinking lights under a neon cloud sign, data centre at night',
+  web: 'a browser window with colourful layout blocks on a big screen',
+  law: 'golden scales of justice, a judge\'s gavel and a stack of case files',
+  health: 'a glowing medical cross, a stethoscope and a clinic window',
+  teach: 'a chalkboard with equations, a stack of books and a classroom window',
+  design: 'a paint palette, brand swatches and a stylus on a creative studio desk',
+  food: 'a beautifully plated dish with steam rising, a restaurant terrace',
+  build: 'architectural blueprints with a drawn building and a hard hat',
+  market: 'a megaphone sending out glowing signal waves and a rising growth chart',
+  media: 'a vintage camera and studio lights, a film shoot at golden hour',
+  work: 'a leather briefcase with documents on a desk by a window',
+  code: 'a laptop with colourful code on a desk by a window'
+};
 const HUES = [['#2a0e5c', '#ff5f8a'], ['#2a0e5c', '#7a2a9a'], ['#4a1a72', '#ff9a5a'], ['#2f1a6a', '#ff7fa8']];
-function cardScene(p, i) {
-  const h = HUES[i % HUES.length], kind = kindFor(p), id = 'g' + i;
+function cardScene(p, i, role) {
+  const h = HUES[i % HUES.length], kind = kindFor(p, role), id = 'g' + i;
   let back = '<rect width="400" height="240" fill="url(#' + id + ')"/><circle cx="' + (300 - (i % 3) * 90) + '" cy="96" r="44" fill="#ffd08a" opacity=".9"/>';
   for (let k = 0; k < 16; k++) { const w = 20 + rnd(k, i, 1) * 16, ht = 40 + rnd(k, i, 2) * 80, x = k * 26 - 4; back += '<rect x="' + x + '" y="' + (176 - ht) + '" width="' + w + '" height="' + ht + '" fill="#2b1250" opacity=".85"/>' + windows(x, 176 - ht, w, ht, 2, Math.floor(ht / 18), k + i, '#ffcf7a', '#3d1c69'); }
   back += '<rect y="176" width="400" height="64" fill="#1a0b30"/><rect y="176" width="400" height="3" fill="#ff7bb0" opacity=".5"/>' + palm(30, 190, 120, 18, '#120726') + palm(374, 192, 110, -18, '#120726');
@@ -166,7 +207,7 @@ function render(d) {
   };
   const badges = Array.from(new Set(projects.map(p => p.badge).filter(Boolean)));
   const chips = badges.length >= 2 && badges.length <= 6 ? '<div class="chips js-only" role="group" aria-label="Filter"><button type="button" class="on" data-f="">All</button>' + badges.map(b => '<button type="button" data-f="' + esc(b) + '">' + esc(b) + '</button>').join('') + '</div>' : '';
-  const cards = '<ul class="files">' + projects.map((p, i) => '<li class="file" data-b="' + esc(p.badge || '') + '" style="' + col(i + 1) + '"><details class="pj"><summary><span class="pic">' + (p.image ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">' : cardScene(p, i)) + '</span><span class="cap"><span class="k">' + esc(p.badge || p.sub || 'Project') + '</span><strong>' + esc(p.t) + '</strong><em>' + esc(p.stack || p.blurb || '') + '</em><span class="open">Open brief <i aria-hidden="true">+</i></span></span></summary><div class="in">' + pjBody(p) + '</div></details></li>').join('') + '</ul>';
+  const cards = '<ul class="files">' + projects.map((p, i) => '<li class="file" data-b="' + esc(p.badge || '') + '" style="' + col(i + 1) + '"><details class="pj"><summary><span class="pic">' + (p.image ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">' : cardScene(p, i, site.role)) + '</span><span class="cap"><span class="k">' + esc(p.badge || p.sub || 'Project') + '</span><strong>' + esc(p.t) + '</strong><em>' + esc(p.stack || p.blurb || '') + '</em><span class="open">Open brief <i aria-hidden="true">+</i></span></span></summary><div class="in">' + pjBody(p) + '</div></details></li>').join('') + '</ul>';
 
   // Career as numbered rows with a verb tile, plus a stats card
   const tileWord = e => { const t = (e.tag || e.label || '').trim(); return (t && t.length <= 11 ? t : (e.title || '').split(/\s+/)[0]).toUpperCase(); };
@@ -202,10 +243,10 @@ function render(d) {
     '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%270%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23ff2e88%27/%3E%3Cstop offset=%271%27 stop-color=%27%23ff9a3c%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27url(%23g)%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2732%27 font-family=%27Arial,sans-serif%27 font-weight=%27900%27 font-style=%27italic%27 text-anchor=%27middle%27 fill=%27%2312061f%27%3E' + esc(initials) + '%3C/text%3E%3C/svg%3E">\n' +
     '<script>document.documentElement.className="js"</script>\n<link rel="stylesheet" href="style.css">\n' + core.jsonLd(d) + '\n</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
     '<nav class="top" aria-label="Sections"><a class="brand" href="#top"><i aria-hidden="true">' + esc(initials) + '</i><span>' + esc(site.name) + '</span></a><div class="links">' + links + '</div><details class="menu"><summary>Menu</summary><div>' + links + '</div></details><a class="btn ghost small" href="#contact">' + esc(title('contact')) + '</a></nav>\n' +
-    '<header class="hero" id="top">' + heroScene() + '<div class="scrim" aria-hidden="true"></div>\n  <div class="inner"><p class="eyebrow">' + esc(site.role) + '</p><h1 aria-label="' + esc(site.name) + '"><span class="f">' + esc(first) + '</span>' + (rest ? ' <span class="l">' + esc(rest) + '</span>' : '') + '</h1><p class="lede">' + esc(site.tagline) + '</p>' + heroBtns + '</div></header>\n' + stats +
+    '<header class="hero" id="top">' + (site.heroImage ? '<img class="art" src="' + esc(site.heroImage) + '" alt="" fetchpriority="high">' : heroScene()) + '<div class="scrim" aria-hidden="true"></div>\n  <div class="inner"><p class="eyebrow">' + esc(site.role) + '</p><h1 aria-label="' + esc(site.name) + '"><span class="f">' + esc(first) + '</span>' + (rest ? ' <span class="l">' + esc(rest) + '</span>' : '') + '</h1><p class="lede">' + esc(site.tagline) + '</p>' + heroBtns + '</div></header>\n' + stats +
     '<main id="main">\n' + zones.map(section).join('\n') + '\n</main>\n<footer><div class="wrap"><p>' + esc(site.name) + ' · ' + esc(site.role) + (site.footerNote ? ' · ' + esc(site.footerNote) : '') + '</p>\n' + textVersion + '\n</div></footer>\n' +
     '<dialog id="dlg" aria-labelledby="dlg-t"><div class="dlg-bar"><h2 id="dlg-t"></h2><button type="button" class="dlg-x">Close</button></div><div class="dlg-body"></div></dialog>\n' +
     '<script src="script.js"></script>\n' + core.analyticsTags(d) + '\n</body>\n</html>\n';
 }
 
-module.exports = { id: 'neon-coast', files: ['style.css', 'script.js'], render, kindFor };
+module.exports = { id: 'neon-coast', files: ['style.css', 'script.js'], render, kindFor, MOTIF_TEXT };

@@ -102,6 +102,15 @@ If the person has paid work, **the first of the three `heroStats` is how long th
 - **Education `details`:** fill them from the person's own facts whenever the dates line up, for example a degree whose years match a thesis, a final-year project, a poster or a hackathon win (`{ label: "Built", text: "..." }`, `{ label: "Result", text: "..." }`). Leave `details: []` only when there is genuinely nothing real to add. A stop with no details gets no dropdown arrow.
 - Any list that is empty removes its section. Do not add placeholder text to fill a card.
 
+## Pictures for image-led designs
+
+Some designs depend on real pictures. `npm run themes` marks them ("looks best with generated images"); today that is `neon-coast`. The drawn fallback is only a stopgap. It is flat, and next to a painted hero it looks poor. So handle pictures **before** you build, not after:
+
+1. **Know what you can do.** Can you generate images (an image tool, a connector, or an image model)? Say so to yourself before you offer the design.
+2. **If you can:** run `npm run image-prompts`. It prints a hero prompt and one prompt per project, written from the person's own content. Generate each image, save it in `assets/` (JPEG, under 250 KB, hero 16:9, projects 5:3), then set `site.heroImage` and each project's `image` in `profile.js`. Look at every picture: no text in it, no real people or brands, and it must fit the project.
+3. **If you cannot:** say so up front, in one plain sentence, when you offer the design: "This design looks best with generated pictures and I cannot make them here." Then offer a choice: (a) they generate the images with the prompts from `npm run image-prompts` in any image tool and send you the files, (b) a design that does not need pictures, or (c) the drawn fallback for now. Never present the drawn fallback as the finished look.
+4. Never reuse pictures that belong to someone else, and never put a real person's likeness in a generated picture.
+
 ## Choose the design (a theme)
 
 Run `npm run themes` to list the designs in `themes/` with their mood and who they suit. Pick with the person, not for them:
